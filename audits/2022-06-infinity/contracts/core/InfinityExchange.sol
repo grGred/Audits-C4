@@ -188,7 +188,7 @@ contract InfinityExchange is ReentrancyGuard, Ownable {
     );
     bytes32 makerOrderHash = _hash(makerOrder);
     require(isOrderValid(makerOrder, makerOrderHash), 'invalid maker order');
-    uint256 ordersLength = manyMakerOrders.length;
+    uint256 ordersLength = many`MakerOrders.length;
     // the below 3 variables are copied to memory once to save on gas
     // an SLOAD costs minimum 100 gas where an MLOAD only costs minimum 3 gas
     // since these values won't change during function execution, we can save on gas by copying them to memory once

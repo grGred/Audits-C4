@@ -16,15 +16,15 @@ export default {
       allowUnlimitedContractSize: false,
       gas: 10000000
     },
-    goerli: {
-      url: 'https://eth-goerli.alchemyapi.io/v2/' + process.env.ALCHEMY_GOERLI_KEY,
-      accounts: [process.env.ETH_GOERLI_PRIV_KEY, process.env.ETH_GOERLI_PRIV_KEY_2]
-    },
-    mainnet: {
-      url: 'https://eth-mainnet.alchemyapi.io/v2/' + process.env.ALCHEMY_MAINNET_KEY,
-      accounts: [process.env.ETH_MAINNET_PRIV_KEY, process.env.ETH_MAINNET_PRIV_KEY_2],
-      gasPrice: parseUnits('70', 'gwei').toNumber()
-    }
+    // goerli: {
+    //   url: 'https://eth-goerli.alchemyapi.io/v2/' + process.env.ALCHEMY_GOERLI_KEY,
+    //   accounts: [process.env.ETH_GOERLI_PRIV_KEY, process.env.ETH_GOERLI_PRIV_KEY_2]
+    // },
+    // mainnet: {
+    //   url: 'https://eth-mainnet.alchemyapi.io/v2/' + process.env.ALCHEMY_MAINNET_KEY,
+    //   accounts: [process.env.ETH_MAINNET_PRIV_KEY, process.env.ETH_MAINNET_PRIV_KEY_2],
+    //   gasPrice: parseUnits('70', 'gwei').toNumber()
+    // }
   },
   solidity: {
     compilers: [
@@ -44,7 +44,7 @@ export default {
     apiKey: process.env.ETHERSCAN_API_KEY
   },
   gasReporter: {
-    enabled: true,
+    enabled: false,
     currency: 'USD'
   },
   contractSizer: {

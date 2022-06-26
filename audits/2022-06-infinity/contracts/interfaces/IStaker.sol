@@ -24,10 +24,7 @@ enum StakeLevel {
  * @notice Infinity token staker interface
  */
 interface IStaker {
-  function stake(
-    uint256 amount,
-    Duration duration
-  ) external;
+  function stake(uint256 amount, Duration duration) external;
 
   function changeDuration(
     uint256 amount,

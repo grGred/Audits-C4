@@ -9,7 +9,6 @@ import {OrderTypes} from '../libs/OrderTypes.sol';
  * @notice Complication interface that must be implemented by all complications (execution strategies)
  */
 interface IComplication {
-
   function canExecMatchOrder(
     OrderTypes.MakerOrder calldata sell,
     OrderTypes.MakerOrder calldata buy,
