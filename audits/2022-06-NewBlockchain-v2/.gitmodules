@@ -1,0 +1,6 @@
+[submodule "lending-market-v2"]
+	path = lending-market-v2
+	url = https://github.com/Plex-Engineer/lending-market-v2.git
+[submodule "manifest-v2"]
+	path = manifest-v2
+	url = https://github.com/Plex-Engineer/manifest-v2.git
