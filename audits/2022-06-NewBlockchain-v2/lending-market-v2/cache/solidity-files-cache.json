@@ -1,0 +1,2362 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Accountant/AccountantDelegate.sol": {
+      "lastModificationDate": 1656358286229,
+      "contentHash": "b5cad0b6c00c1d8c64d64e8774219411",
+      "sourceName": "contracts/Accountant/AccountantDelegate.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./AccountantInterfaces.sol",
+        "../ExponentialNoError.sol",
+        "../ErrorReporter.sol",
+        "../Treasury/TreasuryInterfaces.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "AccountantDelegate"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Accountant/AccountantInterfaces.sol": {
+      "lastModificationDate": 1656358286230,
+      "contentHash": "725b2400fb7fcb4bc0c863aa68c36a88",
+      "sourceName": "contracts/Accountant/AccountantInterfaces.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../Note.sol",
+        "../CNote.sol",
+        "../ComptrollerInterface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "AccountantDelegatorInterface",
+        "AccountantDelegatorStorage",
+        "AccountantErrors",
+        "AccountantInterface",
+        "AccountantStorageV1"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/ExponentialNoError.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "ce0f7a2fe63f8f029cf97ecff2e48376",
+      "sourceName": "contracts/ExponentialNoError.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "ExponentialNoError"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/ErrorReporter.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "756ac7675cf0ceb44ed344076b62714d",
+      "sourceName": "contracts/ErrorReporter.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "ComptrollerErrorReporter",
+        "TokenErrorReporter"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Treasury/TreasuryInterfaces.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "a366efa1c468e0c29bc7fb1439a471c0",
+      "sourceName": "contracts/Treasury/TreasuryInterfaces.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../EIP20Interface.sol",
+        "../IProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "TreasuryDelegatorInterface",
+        "TreasuryDelegatorStorage",
+        "TreasuryInterface",
+        "TreasuryStorageV1"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1656358204421,
+      "contentHash": "cc4777addd464ea56fa35b1c45df0591",
+      "sourceName": "hardhat/console.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "console"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Note.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "782e9dd1e3ae399f78eadb727dc5b8a9",
+      "sourceName": "contracts/Note.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "Note"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CNote.sol": {
+      "lastModificationDate": 1656358286230,
+      "contentHash": "49a7da0b5b9a06cce7cab3f2b47a760e",
+      "sourceName": "contracts/CNote.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CErc20Delegate.sol",
+        "./Accountant/AccountantInterfaces.sol",
+        "./Treasury/TreasuryInterfaces.sol",
+        "./ErrorReporter.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CNote"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/ComptrollerInterface.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "b6cc72b3c50ad69e163ca9e81f7286d3",
+      "sourceName": "contracts/ComptrollerInterface.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "ComptrollerInterface"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/ERC20.sol": {
+      "lastModificationDate": 1656358286231,
+      "contentHash": "fae711ddac7f48de136084eede5bab87",
+      "sourceName": "contracts/ERC20.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./EIP20Interface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "ERC20"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/EIP20Interface.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "c00d6a06d24b7bbaee081458554a68ac",
+      "sourceName": "contracts/EIP20Interface.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "EIP20Interface"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CErc20Delegate.sol": {
+      "lastModificationDate": 1656357570506,
+      "contentHash": "3da7113e09d32e9d943892d840cf7609",
+      "sourceName": "contracts/CErc20Delegate.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CErc20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CErc20Delegate"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CErc20.sol": {
+      "lastModificationDate": 1656358286230,
+      "contentHash": "63a024587e97a4adf6cfe69813f0904a",
+      "sourceName": "contracts/CErc20.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CToken.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CErc20",
+        "CompLike"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CToken.sol": {
+      "lastModificationDate": 1656358286231,
+      "contentHash": "59dba9ccb8c272b5cda8e6ca72b11bc8",
+      "sourceName": "contracts/CToken.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ComptrollerInterface.sol",
+        "./CTokenInterfaces.sol",
+        "./ErrorReporter.sol",
+        "./EIP20Interface.sol",
+        "./InterestRateModel.sol",
+        "./ExponentialNoError.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CToken"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CTokenInterfaces.sol": {
+      "lastModificationDate": 1656358286231,
+      "contentHash": "c2ca1a09c410349e17ce668b7fd19119",
+      "sourceName": "contracts/CTokenInterfaces.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ComptrollerInterface.sol",
+        "./InterestRateModel.sol",
+        "./EIP20NonStandardInterface.sol",
+        "./ErrorReporter.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CDelegateInterface",
+        "CDelegationStorage",
+        "CDelegatorInterface",
+        "CErc20Interface",
+        "CErc20Storage",
+        "CTokenInterface",
+        "CTokenStorage"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/InterestRateModel.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "e517419d37732d0021d6b5a97ae5b9ab",
+      "sourceName": "contracts/InterestRateModel.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "InterestRateModel"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/EIP20NonStandardInterface.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "e27a903d064172c95703d59e56bef727",
+      "sourceName": "contracts/EIP20NonStandardInterface.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "EIP20NonStandardInterface"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/IProposal.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "689bd07acf0f6b715f0fc22a7e325e0a",
+      "sourceName": "contracts/IProposal.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": [
+        "IProposal"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Stableswap/BaseV1-core.sol": {
+      "lastModificationDate": 1656361364460,
+      "contentHash": "5294be2aaa827c28a037fe7d53dafd7b",
+      "sourceName": "contracts/Stableswap/BaseV1-core.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "0.8.11"
+      ],
+      "artifacts": [
+        "BaseV1Factory",
+        "BaseV1Pair",
+        "IBaseV1Callee",
+        "Math",
+        "erc20"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/SimplePriceOracle.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "23559a1f36fd6dafad2ed5839f979d01",
+      "sourceName": "contracts/SimplePriceOracle.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./PriceOracle.sol",
+        "./CErc20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "SimplePriceOracle"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/PriceOracle.sol": {
+      "lastModificationDate": 1656357570509,
+      "contentHash": "8eb87ff5da7403c82dc2feae4731be58",
+      "sourceName": "contracts/PriceOracle.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "PriceOracle"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Stableswap/BaseV1-periphery.sol": {
+      "lastModificationDate": 1656358286233,
+      "contentHash": "037054fe6a4a41149c633c18bcce0196",
+      "sourceName": "contracts/Stableswap/BaseV1-periphery.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../CToken.sol",
+        "../PriceOracle.sol"
+      ],
+      "versionPragmas": [
+        "0.8.11"
+      ],
+      "artifacts": [
+        "BaseV1Router01",
+        "IBaseV1Factory",
+        "IBaseV1Pair",
+        "ICErc20",
+        "IWCANTO",
+        "Math",
+        "erc20"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Lens/CompoundLens.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "5678d2615135017a88d84a64c0da38cf",
+      "sourceName": "contracts/Lens/CompoundLens.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../CErc20.sol",
+        "../CToken.sol",
+        "../PriceOracle.sol",
+        "../EIP20Interface.sol",
+        "../Governance/GovernorBravoDelegate.sol",
+        "../Governance/Comp.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CompoundLens",
+        "ComptrollerLensInterface",
+        "GovernorBravoInterface"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Governance/GovernorBravoDelegate.sol": {
+      "lastModificationDate": 1656358286231,
+      "contentHash": "174fc681efb0bfacbbd87aacca7adb7c",
+      "sourceName": "contracts/Governance/GovernorBravoDelegate.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./GovernorBravoInterfaces.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "GovernorBravoDelegate"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Governance/Comp.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "40d4f4a6c12f4b82e4ac71c89968cc89",
+      "sourceName": "contracts/Governance/Comp.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "Comp"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Governance/GovernorBravoInterfaces.sol": {
+      "lastModificationDate": 1656358286231,
+      "contentHash": "4136737611f85df8ca977c6d995d9efc",
+      "sourceName": "contracts/Governance/GovernorBravoInterfaces.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../IProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "GovernorBravoDelegateStorageV1",
+        "GovernorBravoDelegateStorageV2",
+        "GovernorBravoDelegatorStorage",
+        "GovernorBravoEvents",
+        "TimelockInterface"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Treasury/TreasuryDelegate.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "692d105520d55984dd2e8eada310becc",
+      "sourceName": "contracts/Treasury/TreasuryDelegate.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../IProposal.sol",
+        "../EIP20Interface.sol",
+        "../Lens/CompoundLens.sol",
+        "../Comptroller.sol",
+        "./TreasuryInterfaces.sol",
+        "../CTokenInterfaces.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "TreasuryDelegate"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Comptroller.sol": {
+      "lastModificationDate": 1656358286231,
+      "contentHash": "74512747d88180afc89f8849eb6d896b",
+      "sourceName": "contracts/Comptroller.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CToken.sol",
+        "./ErrorReporter.sol",
+        "./PriceOracle.sol",
+        "./ComptrollerInterface.sol",
+        "./ComptrollerStorage.sol",
+        "./Unitroller.sol",
+        "./Governance/Comp.sol",
+        "./WETH.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "Comptroller"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/ComptrollerStorage.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "979f74c1b63efa85f94a84f9f960cedc",
+      "sourceName": "contracts/ComptrollerStorage.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CToken.sol",
+        "./PriceOracle.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "ComptrollerV1Storage",
+        "ComptrollerV2Storage",
+        "ComptrollerV3Storage",
+        "ComptrollerV4Storage",
+        "ComptrollerV5Storage",
+        "ComptrollerV6Storage",
+        "ComptrollerV7Storage",
+        "UnitrollerAdminStorage"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Unitroller.sol": {
+      "lastModificationDate": 1656357570509,
+      "contentHash": "ed53a0e06478bb07b66b055195b7a52d",
+      "sourceName": "contracts/Unitroller.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ErrorReporter.sol",
+        "./ComptrollerStorage.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "Unitroller"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/WETH.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "0b40a3bd22b1023a1936e0cbd905bc52",
+      "sourceName": "contracts/WETH.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./EIP20Interface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "WETH"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CErc20Delegator.sol": {
+      "lastModificationDate": 1656358286230,
+      "contentHash": "eea9575ee5d816a7847357566a49a029",
+      "sourceName": "contracts/CErc20Delegator.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CTokenInterfaces.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CErc20Delegator"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/ComptrollerG7.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "0400105b1b9fe1a1d4bea33ff739750c",
+      "sourceName": "contracts/ComptrollerG7.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CToken.sol",
+        "./ErrorReporter.sol",
+        "./PriceOracle.sol",
+        "./ComptrollerInterface.sol",
+        "./ComptrollerStorage.sol",
+        "./Unitroller.sol",
+        "./Governance/Comp.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "ComptrollerG7"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Reservoir.sol": {
+      "lastModificationDate": 1656357570509,
+      "contentHash": "fcb89f3a2211b2fdce36350930e7b70a",
+      "sourceName": "contracts/Reservoir.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./EIP20Interface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "Reservoir"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Treasury/TreasuryDelegator.sol": {
+      "lastModificationDate": 1656357570509,
+      "contentHash": "e0d326c46fdf32dc57f531dfd1290cd7",
+      "sourceName": "contracts/Treasury/TreasuryDelegator.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./TreasuryInterfaces.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "TreasuryDelegator"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Governance/GovernorBravoDelegator.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "35707882ef325768605a15a68c4be3a9",
+      "sourceName": "contracts/Governance/GovernorBravoDelegator.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./GovernorBravoInterfaces.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "GovernorBravoDelegator"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CDaiDelegate.sol": {
+      "lastModificationDate": 1656357570506,
+      "contentHash": "4ad17bc8a041018e013534a4aede5e63",
+      "sourceName": "contracts/CDaiDelegate.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CErc20Delegate.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CDaiDelegate",
+        "DaiJoinLike",
+        "GemLike",
+        "PotLike",
+        "VatLike"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Accountant/AccountantDelegator.sol": {
+      "lastModificationDate": 1656357570505,
+      "contentHash": "6a9b940dcd710153084e0a29504be276",
+      "sourceName": "contracts/Accountant/AccountantDelegator.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./AccountantInterfaces.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "AccountantDelegator"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/WhitePaperInterestRateModel.sol": {
+      "lastModificationDate": 1656357570509,
+      "contentHash": "f1cb53432492900e9a4ea6f4583031e1",
+      "sourceName": "contracts/WhitePaperInterestRateModel.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./InterestRateModel.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "WhitePaperInterestRateModel"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/NoteInterest.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "1ff924df594766169d963e1084a608fd",
+      "sourceName": "contracts/NoteInterest.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./InterestRateModel.sol",
+        "./PriceOracle.sol",
+        "./SafeMath.sol",
+        "./CErc20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "NoteRateModel"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/SafeMath.sol": {
+      "lastModificationDate": 1656357570509,
+      "contentHash": "a2aad7ce7d4fa52a7715373836f66d2d",
+      "sourceName": "contracts/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Timelock.sol": {
+      "lastModificationDate": 1656358286232,
+      "contentHash": "fd40eb9b0369dc431000a1b88024d649",
+      "sourceName": "contracts/Timelock.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./SafeMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "Timelock"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/JumpRateModel.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "d9d4cb3c64e2cf122c5dfe990e18644c",
+      "sourceName": "contracts/JumpRateModel.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./InterestRateModel.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "JumpRateModel"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/JumpRateModelV2.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "a26c396fe92ca2ad0964f1eb7656303e",
+      "sourceName": "contracts/JumpRateModelV2.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./BaseJumpRateModelV2.sol",
+        "./InterestRateModel.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "JumpRateModelV2"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/BaseJumpRateModelV2.sol": {
+      "lastModificationDate": 1656357570505,
+      "contentHash": "0cafef0f7ea1fd9b5696d3966a54f776",
+      "sourceName": "contracts/BaseJumpRateModelV2.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./InterestRateModel.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "BaseJumpRateModelV2"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/DAIInterestRateModelV3.sol": {
+      "lastModificationDate": 1656357570507,
+      "contentHash": "7b6cdbd14bba53a1d50f8038488d8bff",
+      "sourceName": "contracts/DAIInterestRateModelV3.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./JumpRateModelV2.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "DAIInterestRateModelV3",
+        "JugLike",
+        "PotLike"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CEther.sol": {
+      "lastModificationDate": 1656358286230,
+      "contentHash": "3c208b98e5cb153531bf5e947de62cb6",
+      "sourceName": "contracts/CEther.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CEther"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Maximillion.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "a4b76914b3686ae768fa7548f5fcb0cc",
+      "sourceName": "contracts/Maximillion.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CEther.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "Maximillion"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/CErc20Immutable.sol": {
+      "lastModificationDate": 1656358286230,
+      "contentHash": "98839877cbb31854615c6fea30379464",
+      "sourceName": "contracts/CErc20Immutable.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./CErc20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CErc20Immutable"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Governance/GovernorAlpha.sol": {
+      "lastModificationDate": 1656357570508,
+      "contentHash": "c6626ab1af3d0e65f82b2e013877c768",
+      "sourceName": "contracts/Governance/GovernorAlpha.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.10"
+      ],
+      "artifacts": [
+        "CompInterface",
+        "GovernorAlpha",
+        "TimelockInterface"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Stableswap/test/calculations.sol": {
+      "lastModificationDate": 1656358286233,
+      "contentHash": "b08795630c807550291964ac375a19c6",
+      "sourceName": "contracts/Stableswap/test/calculations.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.6"
+      ],
+      "artifacts": [
+        "Math",
+        "roots"
+      ]
+    },
+    "/Users/tkkwon/AUDIT_CHANGES/lending-updates/contracts/Stableswap/test/Token.sol": {
+      "lastModificationDate": 1656358286233,
+      "contentHash": "e4ece33c1d55552bd2c52692fabadb59",
+      "sourceName": "contracts/Stableswap/test/Token.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.11"
+      ],
+      "artifacts": [
+        "Token"
+      ]
+    }
+  }
+}

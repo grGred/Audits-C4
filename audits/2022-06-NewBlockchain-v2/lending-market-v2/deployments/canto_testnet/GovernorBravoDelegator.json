@@ -1,0 +1,429 @@
+{
+  "address": "0xcFd17e756e2BAfBB109bfD1A5626C7c1DAf655ab",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "timelock_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "admin_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "implementation_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "oldAdmin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newAdmin",
+          "type": "address"
+        }
+      ],
+      "name": "NewAdmin",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "oldImplementation",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newImplementation",
+          "type": "address"
+        }
+      ],
+      "name": "NewImplementation",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "oldPendingAdmin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newPendingAdmin",
+          "type": "address"
+        }
+      ],
+      "name": "NewPendingAdmin",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProposalCanceled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "proposer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "targets",
+          "type": "address[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "values",
+          "type": "uint256[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "string[]",
+          "name": "signatures",
+          "type": "string[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes[]",
+          "name": "calldatas",
+          "type": "bytes[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "startBlock",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "endBlock",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "name": "ProposalCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProposalExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "eta",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProposalQueued",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldProposalThreshold",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newProposalThreshold",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProposalThresholdSet",
+      "type": "event"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "inputs": [],
+      "name": "_acceptInitialAdminDelegated",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "_initiateDelegated",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "implementation_",
+          "type": "address"
+        }
+      ],
+      "name": "_setImplementation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newPendingAdmin",
+          "type": "address"
+        }
+      ],
+      "name": "_setPendingAdminDelegated",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "implementation",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pendingAdmin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xb5e4115a5645e0790e689992b86ede35352d26685dc9723322ffa9df0efcb4be",
+  "receipt": {
+    "to": null,
+    "from": "0x1e67D1727e467E1102D6a31c17fDB664945148AD",
+    "contractAddress": "0xcFd17e756e2BAfBB109bfD1A5626C7c1DAf655ab",
+    "transactionIndex": 0,
+    "gasUsed": "531540",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004000000200000000000000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xc0373dfc28626521ef7e8a5c8e5575ab5298d55113b0e0f40bb4a1d26e4f3157",
+    "transactionHash": "0xb5e4115a5645e0790e689992b86ede35352d26685dc9723322ffa9df0efcb4be",
+    "logs": [
+      {
+        "transactionIndex": 0,
+        "blockNumber": 164518,
+        "transactionHash": "0xb5e4115a5645e0790e689992b86ede35352d26685dc9723322ffa9df0efcb4be",
+        "address": "0xcFd17e756e2BAfBB109bfD1A5626C7c1DAf655ab",
+        "topics": [
+          "0xd604de94d45953f9138079ec1b82d533cb2160c906d1076d1f7ed54befbca97a"
+        ],
+        "data": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000009ddd55856ed78f06b52e7584af67e5af072107c0",
+        "logIndex": 0,
+        "blockHash": "0xc0373dfc28626521ef7e8a5c8e5575ab5298d55113b0e0f40bb4a1d26e4f3157"
+      }
+    ],
+    "blockNumber": 164518,
+    "cumulativeGasUsed": "531540",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x3c6A406Bb5c2eA141723D062ffD1d1D0101af53e",
+    "0x1e67D1727e467E1102D6a31c17fDB664945148AD",
+    "0x9DDd55856ED78F06b52e7584Af67e5Af072107C0"
+  ],
+  "numDeployments": 3,
+  "solcInputHash": "e0d58323eecab65c0e238d24be016b29",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"timelock_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"admin_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"implementation_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"NewAdmin\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldImplementation\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"NewImplementation\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldPendingAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newPendingAdmin\",\"type\":\"address\"}],\"name\":\"NewPendingAdmin\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"ProposalCanceled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"proposer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"targets\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"string[]\",\"name\":\"signatures\",\"type\":\"string[]\"},{\"indexed\":false,\"internalType\":\"bytes[]\",\"name\":\"calldatas\",\"type\":\"bytes[]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"startBlock\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"endBlock\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"}],\"name\":\"ProposalCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"ProposalExecuted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"eta\",\"type\":\"uint256\"}],\"name\":\"ProposalQueued\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldProposalThreshold\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newProposalThreshold\",\"type\":\"uint256\"}],\"name\":\"ProposalThresholdSet\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[],\"name\":\"_acceptInitialAdminDelegated\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_initiateDelegated\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"implementation_\",\"type\":\"address\"}],\"name\":\"_setImplementation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newPendingAdmin\",\"type\":\"address\"}],\"name\":\"_setPendingAdminDelegated\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingAdmin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"_setImplementation(address)\":{\"params\":{\"implementation_\":\"The address of the new implementation for delegation\"}}},\"version\":1},\"userdoc\":{\"events\":{\"NewAdmin(address,address)\":{\"notice\":\"Emitted when pendingAdmin is accepted, which means admin is updated\"},\"NewImplementation(address,address)\":{\"notice\":\"Emitted when implementation is changed\"},\"NewPendingAdmin(address,address)\":{\"notice\":\"Emitted when pendingAdmin is changed\"},\"ProposalCanceled(uint256)\":{\"notice\":\"An event emitted when a proposal has been canceled\"},\"ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)\":{\"notice\":\"An event emitted when a new proposal is created\"},\"ProposalExecuted(uint256)\":{\"notice\":\"An event emitted when a proposal has been executed in the Timelock\"},\"ProposalQueued(uint256,uint256)\":{\"notice\":\"An event emitted when a proposal has been queued in the Timelock\"},\"ProposalThresholdSet(uint256,uint256)\":{\"notice\":\"Emitted when proposal threshold is set\"}},\"kind\":\"user\",\"methods\":{\"_acceptInitialAdminDelegated()\":{\"notice\":\"Called by the admin to make a delegate call for the acceptInitialAdmin function\"},\"_initiateDelegated()\":{\"notice\":\"Called by the admin to make a delegate call for the initiate function\"},\"_setImplementation(address)\":{\"notice\":\"Called by the admin to update the implementation of the delegator\"},\"_setPendingAdminDelegated(address)\":{\"notice\":\"Called by the admin to make a delegate call for the setPendingAdmin function\"},\"admin()\":{\"notice\":\"Administrator for this contract\"},\"implementation()\":{\"notice\":\"Active brains of Governor\"},\"pendingAdmin()\":{\"notice\":\"Pending administrator for this contract\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Governance/GovernorBravoDelegator.sol\":\"GovernorBravoDelegator\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Governance/GovernorBravoDelegator.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity ^0.8.10;\\n\\nimport \\\"./GovernorBravoInterfaces.sol\\\";\\n\\ncontract GovernorBravoDelegator is GovernorBravoDelegatorStorage, GovernorBravoEvents {\\n\\tconstructor(\\n\\t\\t\\taddress timelock_,\\n\\t\\t\\taddress admin_,\\n\\t        address implementation_) public {\\n\\n        // Admin set to msg.sender for initialization\\n        admin = msg.sender;\\n\\n        delegateTo(implementation_, abi.encodeWithSignature(\\\"initialize(address)\\\",timelock_));\\n\\n        _setImplementation(implementation_);\\n\\n\\t\\tadmin = admin_;\\n\\t}\\n\\n\\t/**\\n     * @notice Called by the admin to update the implementation of the delegator\\n     * @param implementation_ The address of the new implementation for delegation\\n     */\\n    function _setImplementation(address implementation_) public {\\n        require(msg.sender == admin, \\\"GovernorBravoDelegator::_setImplementation: admin only\\\");\\n        require(implementation_ != address(0), \\\"GovernorBravoDelegator::_setImplementation: invalid implementation address\\\");\\n\\n        address oldImplementation = implementation;\\n        implementation = implementation_;\\n\\n        emit NewImplementation(oldImplementation, implementation);\\n    }\\n\\n    /**\\n     * @notice Called by the admin to make a delegate call for the initiate function\\n     */\\n    function _initiateDelegated() external {\\n        require(msg.sender == admin, \\\"GovernorBravoDelegator::_initiateDelegated: admin only\\\");\\n        delegateTo(implementation, abi.encodeWithSignature(\\\"_initiate()\\\"));\\n    }\\n\\n    /**\\n     * @notice Called by the admin to make a delegate call for the acceptInitialAdmin function\\n     */\\n    function _acceptInitialAdminDelegated() external {\\n        require(msg.sender == admin, \\\"GovernorBravoDelegator::_acceptInitialAdminDelegated: admin only\\\");\\n        delegateTo(implementation, abi.encodeWithSignature(\\\"_acceptInitialAdmin()\\\"));\\n    }\\n\\n    /**\\n     * @notice Called by the admin to make a delegate call for the setPendingAdmin function\\n     */\\n    function _setPendingAdminDelegated(address newPendingAdmin) external {\\n        require(msg.sender == admin, \\\"GovernorBravoDelegator::_setPendingAdminDelegated: admin only\\\");\\n        delegateTo(implementation, abi.encodeWithSignature(\\\"_setPendingAdmin(address)\\\", newPendingAdmin));\\n    }\\n\\n    /**\\n     * @notice Internal method to delegate execution to another contract\\n     * @dev It returns to the external caller whatever the implementation returns or forwards reverts\\n     * @param callee The contract to delegatecall\\n     * @param data The raw data to delegatecall\\n     */\\n    function delegateTo(address callee, bytes memory data) internal {\\n        (bool success, bytes memory returnData) = callee.delegatecall(data);\\n        assembly {\\n            if eq(success, 0) {\\n                revert(add(returnData, 0x20), returndatasize())\\n            }\\n        }\\n    }\\n\\n\\t/**\\n     * @dev Delegates execution to an implementation contract.\\n     * It returns to the external caller whatever the implementation returns\\n     * or forwards reverts.\\n     */\\n    fallback () external payable {\\n        // delegate all other functions to current implementation\\n        (bool success, ) = implementation.delegatecall(msg.data);\\n\\n        assembly {\\n              let free_mem_ptr := mload(0x40)\\n              returndatacopy(free_mem_ptr, 0, returndatasize())\\n\\n              switch success\\n              case 0 { revert(free_mem_ptr, returndatasize()) }\\n              default { return(free_mem_ptr, returndatasize()) }\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x3b2466b0da8fb27b2dc952a4c1196b050e3c9bc2c2e513f6834dcaf18b73873e\",\"license\":\"BSD-3-Clause\"},\"contracts/Governance/GovernorBravoInterfaces.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity ^0.8.10;\\n\\nimport \\\"../IProposal.sol\\\";\\n\\n\\ncontract GovernorBravoEvents {\\n    /// @notice An event emitted when a new proposal is created\\n    event ProposalCreated(uint id, address proposer, address[] targets, uint[] values, string[] signatures, bytes[] calldatas, uint startBlock, uint endBlock, string description);\\n\\n    /// @notice An event emitted when a proposal has been canceled\\n    event ProposalCanceled(uint id);\\n\\n    /// @notice An event emitted when a proposal has been queued in the Timelock\\n    event ProposalQueued(uint id, uint eta);\\n\\n    /// @notice An event emitted when a proposal has been executed in the Timelock\\n    event ProposalExecuted(uint id);\\n\\n    /// @notice Emitted when implementation is changed\\n    event NewImplementation(address oldImplementation, address newImplementation);\\n\\n    /// @notice Emitted when proposal threshold is set\\n    event ProposalThresholdSet(uint oldProposalThreshold, uint newProposalThreshold);\\n\\n    /// @notice Emitted when pendingAdmin is changed\\n    event NewPendingAdmin(address oldPendingAdmin, address newPendingAdmin);\\n\\n    /// @notice Emitted when pendingAdmin is accepted, which means admin is updated\\n    event NewAdmin(address oldAdmin, address newAdmin);\\n\\n}\\n\\ncontract GovernorBravoDelegatorStorage {\\n    /// @notice Administrator for this contract\\n    address public admin;\\n\\n    /// @notice Pending administrator for this contract\\n    address public pendingAdmin;\\n\\n    /// @notice Active brains of Governor\\n    address public implementation;\\n}\\n\\n\\n/**\\n * @title Storage for Governor Bravo Delegate\\n * @notice For future upgrades, do not change GovernorBravoDelegateStorageV1. Create a new\\n * contract which implements GovernorBravoDelegateStorageV1 and following the naming convention\\n * GovernorBravoDelegateStorageVX.\\n */\\ncontract GovernorBravoDelegateStorageV1 is GovernorBravoDelegatorStorage {\\n    /// @notice The number of votes required in order for a voter to become a proposer\\n    uint public proposalThreshold;\\n    \\n    uint public initialProposalId;\\n\\n    /// @notice The address of the Compound Protocol Timelock\\n    TimelockInterface public timelock;\\n\\n    /// @notice The official record of all proposals ever proposed\\n    mapping (uint => Proposal) public proposals;\\n\\n    /// @notice The latest proposal for each proposer\\n    mapping (address => uint) public latestProposalIds;\\n\\n\\n    struct Proposal {\\n        /// @notice Unique id for looking up a proposal\\n        uint id;\\n\\n        /// @notice Creator of the proposal\\n        address proposer;\\n\\n        /// @notice The timestamp that the proposal will be available for execution, set once the vote succeeds\\n        uint eta;\\n\\n        /// @notice the ordered list of target addresses for calls to be made\\n        address[] targets;\\n\\n        /// @notice The ordered list of values (i.e. msg.value) to be passed to the calls to be made\\n        uint[] values;\\n\\n        /// @notice The ordered list of function signatures to be called\\n        string[] signatures;\\n\\n        /// @notice The ordered list of calldata to be passed to each call\\n        bytes[] calldatas;\\n\\n        /// @notice Flag marking whether the proposal has been canceled\\n        bool canceled;\\n\\n        /// @notice Flag marking whether the proposal has been executed\\n        bool executed;\\n    }\\n\\n    /// @notice Possible states that a proposal may be in\\n    enum ProposalState {\\n        Queued,\\n        Expired,\\n        Executed\\n    }\\n}\\n\\ncontract GovernorBravoDelegateStorageV2 is GovernorBravoDelegateStorageV1 {\\n    IProposal unigov; //Proposal Store object defined as primitive contract in Canto-Testnet <URL HERE>\\n}\\n\\ninterface TimelockInterface {\\n    function delay() external view returns (uint);\\n    function GRACE_PERIOD() external view returns (uint);\\n    function acceptAdmin() external;\\n    function queuedTransactions(bytes32 hash) external view returns (bool);\\n    function queueTransaction(address target, uint value, string calldata signature, bytes calldata data, uint eta) external returns (bytes32);\\n    function cancelTransaction(address target, uint value, string calldata signature, bytes calldata data, uint eta) external;\\n    function executeTransaction(address target, uint value, string calldata signature, bytes calldata data, uint eta) external payable returns (bytes memory);\\n}\",\"keccak256\":\"0x555277660d19a04e437c020ded28608bff9ed267dcf32c5ac767f61a9037c6f6\",\"license\":\"BSD-3-Clause\"},\"contracts/IProposal.sol\":{\"content\":\"pragma experimental ABIEncoderV2;\\n\\n\\n//Interface name is not important, however functions in it are important\\ninterface IProposal{\\n    struct Proposal {\\n      \\n      // proposal id\\n      uint id;\\n\\n      // title of proposal\\n      string title;\\n\\n      // description of proposal\\n      string desc;\\n\\n      // the ordered list of target addresses for calls to be made\\n      address[] targets;\\n\\n      // the amounts that will be sent by the treasury to each address\\n      uint[] values;\\n\\n      // the denoms that the treasury will send\\n      string[] signatures;\\n\\n      // SHOULD BE NULL\\n      bytes[] calldatas;\\n    }\\n\\n\\n  function QueryProp(uint propId) external view returns(Proposal memory);\\n}\\n\",\"keccak256\":\"0xb162f997a373bfcc13fac0a63108c38389acf21bb520cd26c5d15556796bfff0\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516109ff3803806109ff83398101604081905261002f916102a2565b600080546001600160a01b031916331790556040516001600160a01b038416602482015261008f90829060440160408051601f198184030181529190526020810180516001600160e01b0390811663189acdbd60e31b179091526100bf16565b61009881610135565b50600080546001600160a01b0319166001600160a01b039290921691909117905550610320565b600080836001600160a01b0316836040516100da91906102e5565b600060405180830381855af49150503d8060008114610115576040519150601f19603f3d011682016040523d82523d6000602084013e61011a565b606091505b5091509150600082141561012f573d60208201fd5b50505050565b6000546001600160a01b031633146101a85760405162461bcd60e51b815260206004820152603660248201526000805160206109df83398151915260448201527f656d656e746174696f6e3a2061646d696e206f6e6c790000000000000000000060648201526084015b60405180910390fd5b6001600160a01b0381166102255760405162461bcd60e51b815260206004820152604a60248201526000805160206109df83398151915260448201527f656d656e746174696f6e3a20696e76616c696420696d706c656d656e746174696064820152696f6e206164647265737360b01b608482015260a40161019f565b600280546001600160a01b038381166001600160a01b031983168117909355604080519190921680825260208201939093527fd604de94d45953f9138079ec1b82d533cb2160c906d1076d1f7ed54befbca97a910160405180910390a15050565b80516001600160a01b038116811461029d57600080fd5b919050565b6000806000606084860312156102b757600080fd5b6102c084610286565b92506102ce60208501610286565b91506102dc60408501610286565b90509250925092565b6000825160005b8181101561030657602081860181015185830152016102ec565b81811115610315576000828501525b509190910192915050565b6106b08061032f6000396000f3fe6080604052600436106100705760003560e01c8063678fbac51161004e578063678fbac51461015e578063bb913f411461017e578063cdabcc641461019e578063f851a440146101b357610070565b806322da060b146100eb57806326782247146101025780635c60da1b1461013e575b6002546040516000916001600160a01b03169061009090839036906105ff565b600060405180830381855af49150503d80600081146100cb576040519150601f19603f3d011682016040523d82523d6000602084013e6100d0565b606091505b505090506040513d6000823e8180156100e7573d82f35b3d82fd5b3480156100f757600080fd5b506101006101d3565b005b34801561010e57600080fd5b50600154610122906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b34801561014a57600080fd5b50600254610122906001600160a01b031681565b34801561016a57600080fd5b5061010061017936600461060f565b610292565b34801561018a57600080fd5b5061010061019936600461060f565b610363565b3480156101aa57600080fd5b506101006104cc565b3480156101bf57600080fd5b50600054610122906001600160a01b031681565b6000546001600160a01b031633146102515760405162461bcd60e51b815260206004820152603660248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f696e69746961746044820152756544656c6567617465643a2061646d696e206f6e6c7960501b60648201526084015b60405180910390fd5b6002546040805160048152602481019091526020810180516001600160e01b03166343c78a4160e11b179052610290916001600160a01b031690610589565b565b6000546001600160a01b031633146103125760405162461bcd60e51b815260206004820152603d60248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f73657450656e6460448201527f696e6741646d696e44656c6567617465643a2061646d696e206f6e6c790000006064820152608401610248565b6002546040516001600160a01b03838116602483015261036092169060440160408051601f198184030181529190526020810180516001600160e01b0316632dc7468360e21b179052610589565b50565b6000546001600160a01b031633146103dc5760405162461bcd60e51b815260206004820152603660248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f736574496d706c604482015275656d656e746174696f6e3a2061646d696e206f6e6c7960501b6064820152608401610248565b6001600160a01b03811661046b5760405162461bcd60e51b815260206004820152604a60248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f736574496d706c60448201527f656d656e746174696f6e3a20696e76616c696420696d706c656d656e746174696064820152696f6e206164647265737360b01b608482015260a401610248565b600280546001600160a01b038381166001600160a01b031983168117909355604080519190921680825260208201939093527fd604de94d45953f9138079ec1b82d533cb2160c906d1076d1f7ed54befbca97a910160405180910390a15050565b6000546001600160a01b0316331461054e576040805162461bcd60e51b81526020600482015260248101919091527f476f7665726e6f72427261766f44656c656761746f723a3a5f6163636570744960448201527f6e697469616c41646d696e44656c6567617465643a2061646d696e206f6e6c796064820152608401610248565b6002546040805160048152602481019091526020810180516001600160e01b0316632f3a013760e11b179052610290916001600160a01b0316905b600080836001600160a01b0316836040516105a4919061063f565b600060405180830381855af49150503d80600081146105df576040519150601f19603f3d011682016040523d82523d6000602084013e6105e4565b606091505b509150915060008214156105f9573d60208201fd5b50505050565b8183823760009101908152919050565b60006020828403121561062157600080fd5b81356001600160a01b038116811461063857600080fd5b9392505050565b6000825160005b818110156106605760208186018101518583015201610646565b8181111561066f576000828501525b50919091019291505056fea2646970667358221220a208c28883f0dee460650abed94152171187bb680278223e05e6cbd31d794de264736f6c634300080b0033476f7665726e6f72427261766f44656c656761746f723a3a5f736574496d706c",
+  "deployedBytecode": "0x6080604052600436106100705760003560e01c8063678fbac51161004e578063678fbac51461015e578063bb913f411461017e578063cdabcc641461019e578063f851a440146101b357610070565b806322da060b146100eb57806326782247146101025780635c60da1b1461013e575b6002546040516000916001600160a01b03169061009090839036906105ff565b600060405180830381855af49150503d80600081146100cb576040519150601f19603f3d011682016040523d82523d6000602084013e6100d0565b606091505b505090506040513d6000823e8180156100e7573d82f35b3d82fd5b3480156100f757600080fd5b506101006101d3565b005b34801561010e57600080fd5b50600154610122906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b34801561014a57600080fd5b50600254610122906001600160a01b031681565b34801561016a57600080fd5b5061010061017936600461060f565b610292565b34801561018a57600080fd5b5061010061019936600461060f565b610363565b3480156101aa57600080fd5b506101006104cc565b3480156101bf57600080fd5b50600054610122906001600160a01b031681565b6000546001600160a01b031633146102515760405162461bcd60e51b815260206004820152603660248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f696e69746961746044820152756544656c6567617465643a2061646d696e206f6e6c7960501b60648201526084015b60405180910390fd5b6002546040805160048152602481019091526020810180516001600160e01b03166343c78a4160e11b179052610290916001600160a01b031690610589565b565b6000546001600160a01b031633146103125760405162461bcd60e51b815260206004820152603d60248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f73657450656e6460448201527f696e6741646d696e44656c6567617465643a2061646d696e206f6e6c790000006064820152608401610248565b6002546040516001600160a01b03838116602483015261036092169060440160408051601f198184030181529190526020810180516001600160e01b0316632dc7468360e21b179052610589565b50565b6000546001600160a01b031633146103dc5760405162461bcd60e51b815260206004820152603660248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f736574496d706c604482015275656d656e746174696f6e3a2061646d696e206f6e6c7960501b6064820152608401610248565b6001600160a01b03811661046b5760405162461bcd60e51b815260206004820152604a60248201527f476f7665726e6f72427261766f44656c656761746f723a3a5f736574496d706c60448201527f656d656e746174696f6e3a20696e76616c696420696d706c656d656e746174696064820152696f6e206164647265737360b01b608482015260a401610248565b600280546001600160a01b038381166001600160a01b031983168117909355604080519190921680825260208201939093527fd604de94d45953f9138079ec1b82d533cb2160c906d1076d1f7ed54befbca97a910160405180910390a15050565b6000546001600160a01b0316331461054e576040805162461bcd60e51b81526020600482015260248101919091527f476f7665726e6f72427261766f44656c656761746f723a3a5f6163636570744960448201527f6e697469616c41646d696e44656c6567617465643a2061646d696e206f6e6c796064820152608401610248565b6002546040805160048152602481019091526020810180516001600160e01b0316632f3a013760e11b179052610290916001600160a01b0316905b600080836001600160a01b0316836040516105a4919061063f565b600060405180830381855af49150503d80600081146105df576040519150601f19603f3d011682016040523d82523d6000602084013e6105e4565b606091505b509150915060008214156105f9573d60208201fd5b50505050565b8183823760009101908152919050565b60006020828403121561062157600080fd5b81356001600160a01b038116811461063857600080fd5b9392505050565b6000825160005b818110156106605760208186018101518583015201610646565b8181111561066f576000828501525b50919091019291505056fea2646970667358221220a208c28883f0dee460650abed94152171187bb680278223e05e6cbd31d794de264736f6c634300080b0033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "_setImplementation(address)": {
+        "params": {
+          "implementation_": "The address of the new implementation for delegation"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "NewAdmin(address,address)": {
+        "notice": "Emitted when pendingAdmin is accepted, which means admin is updated"
+      },
+      "NewImplementation(address,address)": {
+        "notice": "Emitted when implementation is changed"
+      },
+      "NewPendingAdmin(address,address)": {
+        "notice": "Emitted when pendingAdmin is changed"
+      },
+      "ProposalCanceled(uint256)": {
+        "notice": "An event emitted when a proposal has been canceled"
+      },
+      "ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)": {
+        "notice": "An event emitted when a new proposal is created"
+      },
+      "ProposalExecuted(uint256)": {
+        "notice": "An event emitted when a proposal has been executed in the Timelock"
+      },
+      "ProposalQueued(uint256,uint256)": {
+        "notice": "An event emitted when a proposal has been queued in the Timelock"
+      },
+      "ProposalThresholdSet(uint256,uint256)": {
+        "notice": "Emitted when proposal threshold is set"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "_acceptInitialAdminDelegated()": {
+        "notice": "Called by the admin to make a delegate call for the acceptInitialAdmin function"
+      },
+      "_initiateDelegated()": {
+        "notice": "Called by the admin to make a delegate call for the initiate function"
+      },
+      "_setImplementation(address)": {
+        "notice": "Called by the admin to update the implementation of the delegator"
+      },
+      "_setPendingAdminDelegated(address)": {
+        "notice": "Called by the admin to make a delegate call for the setPendingAdmin function"
+      },
+      "admin()": {
+        "notice": "Administrator for this contract"
+      },
+      "implementation()": {
+        "notice": "Active brains of Governor"
+      },
+      "pendingAdmin()": {
+        "notice": "Pending administrator for this contract"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 18394,
+        "contract": "contracts/Governance/GovernorBravoDelegator.sol:GovernorBravoDelegator",
+        "label": "admin",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 18397,
+        "contract": "contracts/Governance/GovernorBravoDelegator.sol:GovernorBravoDelegator",
+        "label": "pendingAdmin",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 18400,
+        "contract": "contracts/Governance/GovernorBravoDelegator.sol:GovernorBravoDelegator",
+        "label": "implementation",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_address"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      }
+    }
+  }
+}
