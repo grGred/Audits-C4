@@ -26,9 +26,9 @@ contract WETH is EIP20Interface {
 
     
     function withdraw(uint wamount) public {
-        require(_balanceOf[msg.sender] >= wamount, "sender balance insufficient for withdrawal");
+        require(_balanceOf[msg.sender] >= wamount, "sender balance insufficient for withdrawal"); // @audit-gas >32 bytes
         _balanceOf[msg.sender] -= wamount;
-        payable(msg.sender).transfer(wamount); // rentrant attack must be less than 2300 gas
+        payable(msg.sender).transfer(wamount); // rentrant attack must be less than 2300 gas  // @audit-non use call
         emit Withdrawal(msg.sender, wamount);
     }
 
@@ -69,7 +69,7 @@ contract WETH is EIP20Interface {
         require(_balanceOf[src] >= wad, "WETH::transfeFrom");
 
         if (src != msg.sender && _allowance[src][msg.sender] != type(uint).max) {
-            require(_allowance[src][msg.sender] >= wad, "WETH::transferFrom:allowance insufficient");
+            require(_allowance[src][msg.sender] >= wad, "WETH::transferFrom:allowance insufficient"); // @audit-gas >32 bytes
             _allowance[src][msg.sender] -= wad;
         }
 
@@ -86,8 +86,8 @@ contract WETH is EIP20Interface {
         address spender,
         uint256 amount
     ) internal   {
-        require(owner != address(0), "ERC20: approve from the zero address");
-        require(spender != address(0), "ERC20: approve to the zero address");
+        require(owner != address(0), "ERC20: approve from the zero address"); // @audit-gas >32 bytes
+        require(spender != address(0), "ERC20: approve to the zero address"); // @audit-gas >32 bytes
 
         _allowance[owner][spender] = amount;
         emit Approval(owner, spender, amount);

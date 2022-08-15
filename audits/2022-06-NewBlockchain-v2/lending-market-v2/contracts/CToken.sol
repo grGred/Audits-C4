@@ -30,11 +30,11 @@ abstract contract CToken is CTokenInterface, ExponentialNoError, TokenErrorRepor
                         uint8 decimals_,
                         uint8 stable_
                         ) public {
-        require(msg.sender == admin, "only admin may initialize the market");
-        require(accrualBlockNumber == 0 && borrowIndex == 0, "market may only be initialized once");
+        require(msg.sender == admin, "only admin may initialize the market"); // @audit-gas > 32 bytes
+        require(accrualBlockNumber == 0 && borrowIndex == 0, "market may only be initialized once"); // @audit-gas 2 requiers are cheaper // @audit-gas > 32 bytes
         // Set initial exchange rate
         initialExchangeRateMantissa = initialExchangeRateMantissa_;
-        require(initialExchangeRateMantissa > 0, "initial exchange rate must be greater than zero.");
+        require(initialExchangeRateMantissa > 0, "initial exchange rate must be greater than zero."); // @audit-gas > 32 bytes
 
         stable = stable_;
         // Set the comptroller
@@ -47,7 +47,7 @@ abstract contract CToken is CTokenInterface, ExponentialNoError, TokenErrorRepor
 
         // Set the interest rate model (depends on block number / borrow index)
         err = _setInterestRateModelFresh(interestRateModel_);
-        require(err == NO_ERROR, "setting interest rate model failed");
+        require(err == NO_ERROR, "setting interest rate model failed"); // @audit-gas > 32 bytes
 
         name = name_;   
         symbol = symbol_;

@@ -89,7 +89,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
 
 
     //here for testing purposes
-    address public  WethAddr;
+    address public  WethAddr; // @audit-non extra space
 
 
     constructor() {
@@ -124,11 +124,11 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param cTokens The list of addresses of the cToken markets to be enabled
      * @return Success indicator for whether each corresponding market was entered
      */
-    function enterMarkets(address[] memory cTokens) override public returns (uint[] memory) {
+    function enterMarkets(address[] memory cTokens) override public returns (uint[] memory) { // @audit-gas memory to calldata
         uint len = cTokens.length;
 
         uint[] memory results = new uint[](len);
-        for (uint i = 0; i < len; i++) {
+        for (uint i = 0; i < len; i++) { // @audit-gas improved for loops
             CToken cToken = CToken(cTokens[i]);
 
             results[i] = uint(addToMarketInternal(cToken, msg.sender));
@@ -180,7 +180,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
         CToken cToken = CToken(cTokenAddress);
         /* Get sender tokensHeld and amountOwed underlying from the cToken */
         (uint oErr, uint tokensHeld, uint amountOwed, ) = cToken.getAccountSnapshot(msg.sender);
-        require(oErr == 0, "exitMarket: getAccountSnapshot failed"); // semi-opaque error code
+        require(oErr == 0, "exitMarket: getAccountSnapshot failed"); // semi-opaque error code // @audit-gas > 32 bytes
 
         /* Fail if the sender has a borrow balance */
         if (amountOwed != 0) {
@@ -208,7 +208,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
         CToken[] memory userAssetList = accountAssets[msg.sender];
         uint len = userAssetList.length;
         uint assetIndex = len;
-        for (uint i = 0; i < len; i++) {
+        for (uint i = 0; i < len; i++) { // @audit-gas improved for loops
             if (userAssetList[i] == cToken) {
                 assetIndex = i;
                 break;
@@ -739,7 +739,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
 
         // For each asset the account is in
         CToken[] memory assets = accountAssets[account];
-        for (uint i = 0; i < assets.length; i++) {
+        for (uint i = 0; i < assets.length; i++) { // @audit-gas improved for loops
             CToken asset = assets[i];
             // Read the balances and exchange rate from the cToken
             (oErr, vars.cTokenBalance, vars.borrowBalance, vars.exchangeRateMantissa) = asset.getAccountSnapshot(account);
@@ -961,7 +961,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function _addMarketInternal(address cToken) internal {
-        for (uint i = 0; i < allMarkets.length; i ++) {
+        for (uint i = 0; i < allMarkets.length; i ++) { // @audit-gas improved for loops
             require(allMarkets[i] != CToken(cToken), "market already added");
         }
         allMarkets.push(CToken(cToken));
@@ -1000,14 +1000,14 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
       * @param newBorrowCaps The new borrow cap values in underlying to be set. A value of 0 corresponds to unlimited borrowing.
       */
     function _setMarketBorrowCaps(CToken[] calldata cTokens, uint[] calldata newBorrowCaps) external {
-    	require(msg.sender == admin || msg.sender == borrowCapGuardian, "only admin or borrow cap guardian can set borrow caps");
+    	require(msg.sender == admin || msg.sender == borrowCapGuardian, "only admin or borrow cap guardian can set borrow caps"); // @audit-gas > 32 bytes
 
         uint numMarkets = cTokens.length;
         uint numBorrowCaps = newBorrowCaps.length;
 
-        require(numMarkets != 0 && numMarkets == numBorrowCaps, "invalid input");
+        require(numMarkets != 0 && numMarkets == numBorrowCaps, "invalid input"); // @audit-gas double require
 
-        for(uint i = 0; i < numMarkets; i++) {
+        for(uint i = 0; i < numMarkets; i++) {  // @audit-gas improved for loops
             borrowCaps[address(cTokens[i])] = newBorrowCaps[i];
             emit NewBorrowCap(cTokens[i], newBorrowCaps[i]);
         }
@@ -1018,7 +1018,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param newBorrowCapGuardian The address of the new Borrow Cap Guardian
      */
     function _setBorrowCapGuardian(address newBorrowCapGuardian) external {
-        require(msg.sender == admin, "only admin can set borrow cap guardian");
+        require(msg.sender == admin, "only admin can set borrow cap guardian");  // @audit-gas > 32 bytes
 
         // Save current value for inclusion in log
         address oldBorrowCapGuardian = borrowCapGuardian;
@@ -1053,8 +1053,8 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function _setMintPaused(CToken cToken, bool state) public returns (bool) {
-        require(markets[address(cToken)].isListed, "cannot pause a market that is not listed");
-        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause");
+        require(markets[address(cToken)].isListed, "cannot pause a market that is not listed");  // @audit-gas > 32 bytes
+        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause"); // @audit-gas > 32 bytes
         require(msg.sender == admin || state == true, "only admin can unpause");
 
         mintGuardianPaused[address(cToken)] = state;
@@ -1063,8 +1063,8 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function _setBorrowPaused(CToken cToken, bool state) public returns (bool) {
-        require(markets[address(cToken)].isListed, "cannot pause a market that is not listed");
-        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause");
+        require(markets[address(cToken)].isListed, "cannot pause a market that is not listed"); // @audit-gas > 32 bytes
+        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause"); // @audit-gas > 32 bytes
         require(msg.sender == admin || state == true, "only admin can unpause");
 
         borrowGuardianPaused[address(cToken)] = state;
@@ -1073,7 +1073,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function _setTransferPaused(bool state) public returns (bool) {
-        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause");
+        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause"); // @audit-gas > 32 bytes
         require(msg.sender == admin || state == true, "only admin can unpause");
 
         transferGuardianPaused = state;
@@ -1082,7 +1082,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function _setSeizePaused(bool state) public returns (bool) {
-        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause");
+        require(msg.sender == pauseGuardian || msg.sender == admin, "only pause guardian and admin can pause"); // @audit-gas > 32 bytes
         require(msg.sender == admin || state == true, "only admin can unpause");
 
         seizeGuardianPaused = state;
@@ -1091,14 +1091,14 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function _become(Unitroller unitroller) public {
-        require(msg.sender == unitroller.admin(), "only unitroller admin can change brains");
+        require(msg.sender == unitroller.admin(), "only unitroller admin can change brains"); // @audit-gas > 32 bytes
         require(unitroller._acceptImplementation() == 0, "change not authorized");
     }
 
     /// @notice Delete this function after proposal 65 is executed
     function fixBadAccruals(address[] calldata affectedUsers, uint[] calldata amounts) external {
-        require(msg.sender == admin, "Only admin can call this function"); // Only the timelock can call this function
-        require(!proposal65FixExecuted, "Already executed this one-off function"); // Require that this function is only called once
+        require(msg.sender == admin, "Only admin can call this function"); // Only the timelock can call this function // @audit-gas > 32 bytes
+        require(!proposal65FixExecuted, "Already executed this one-off function"); // Require that this function is only called once // @audit-gas > 32 bytes
         require(affectedUsers.length == amounts.length, "Invalid input");
 
         // Loop variables
@@ -1108,7 +1108,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
         uint newAccrual;
 
         // Iterate through all affected users
-        for (uint i = 0; i < affectedUsers.length; ++i) {
+        for (uint i = 0; i < affectedUsers.length; ++i) {  // @audit-gas improved for loops
             user = affectedUsers[i];
             currentAccrual = compAccrued[user];
 
@@ -1118,7 +1118,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
             // The user has less currently accrued than the amount they incorrectly received.
             if (amountToSubtract > currentAccrual) {
                 // Amount of COMP the user owes the protocol
-                uint accountReceivable = amountToSubtract - currentAccrual; // Underflow safe since amountToSubtract > currentAccrual
+                uint accountReceivable = amountToSubtract - currentAccrual; // Underflow safe since amountToSubtract > currentAccrual // @audit-gas Since the underdlow is safe, make this block unchecked
 
                 uint oldReceivable = compReceivable[user];
                 uint newReceivable = add_(oldReceivable, accountReceivable);
@@ -1159,7 +1159,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param borrowSpeed New borrow-side COMP speed for market
      */
     function setCompSpeedInternal(CToken cToken, uint supplySpeed, uint borrowSpeed) internal {
-        Market storage market = markets[address(cToken)];
+        Market storage market = markets[address(cToken)]; // @audit-gas no need to initialize extra variable
         require(market.isListed, "comp market is not listed");
 
         if (compSupplySpeeds[address(cToken)] != supplySpeed) {
@@ -1212,7 +1212,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param cToken The market whose borrow index to update
      * @dev Index is a cumulative sum of the COMP per cToken accrued.
      */
-    function updateCompBorrowIndex(address cToken, Exp memory marketBorrowIndex) internal {
+    function updateCompBorrowIndex(address cToken, Exp memory marketBorrowIndex) internal { // @audit-gas memory to calldata
         CompMarketState storage borrowState = compBorrowState[cToken];
         uint borrowSpeed = compBorrowSpeeds[cToken];
         uint32 blockNumber = safe32(getBlockNumber(), "block number exceeds 32 bits");
@@ -1238,7 +1238,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
         // This check should be as gas efficient as possible as distributeSupplierComp is called in many places.
         // - We really don't want to call an external contract as that's quite expensive.
 
-        CompMarketState storage supplyState = compSupplyState[cToken];
+        CompMarketState storage supplyState = compSupplyState[cToken]; // @audit-gas no need to initialize extra variable
         uint supplyIndex = supplyState.index;
         uint supplierIndex = compSupplierIndex[cToken][supplier];
 
@@ -1272,12 +1272,12 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param cToken The market in which the borrower is interacting
      * @param borrower The address of the borrower to distribute COMP to
      */
-    function distributeBorrowerComp(address cToken, address borrower, Exp memory marketBorrowIndex) internal {
+    function distributeBorrowerComp(address cToken, address borrower, Exp memory marketBorrowIndex) internal { // @audit-gas memory to calldata
         // TODO: Don't distribute supplier COMP if the user is not in the borrower market.
         // This check should be as gas efficient as possible as distributeBorrowerComp is called in many places.
         // - We really don't want to call an external contract as that's quite expensive.
 
-        CompMarketState storage borrowState = compBorrowState[cToken];
+        CompMarketState storage borrowState = compBorrowState[cToken]; // @audit-gas no need to initialize extra variable since storage is used only once
         uint borrowIndex = borrowState.index;
         uint borrowerIndex = compBorrowerIndex[cToken][borrower];
 
@@ -1335,7 +1335,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param holder The address to claim COMP for
      * @param cTokens The list of markets to claim COMP in
      */
-    function claimComp(address holder, CToken[] memory cTokens) public {
+    function claimComp(address holder, CToken[] memory cTokens) public { // @audit-gas memory to calldata
         address[] memory holders = new address[](1);
         holders[0] = holder;
         claimComp(holders, cTokens, true, true);
@@ -1348,25 +1348,25 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param borrowers Whether or not to claim COMP earned by borrowing
      * @param suppliers Whether or not to claim COMP earned by supplying
      */
-    function claimComp(address[] memory holders, CToken[] memory cTokens, bool borrowers, bool suppliers) public {
-        for (uint i = 0; i < cTokens.length; i++) {
+    function claimComp(address[] memory holders, CToken[] memory cTokens, bool borrowers, bool suppliers) public {  // @audit-gas memory to calldata
+        for (uint i = 0; i < cTokens.length; i++) {  // @audit-gas improved for loops
             CToken cToken = cTokens[i];
             require(markets[address(cToken)].isListed, "market must be listed");
             if (borrowers == true) {
                 Exp memory borrowIndex = Exp({mantissa: cToken.borrowIndex()});
                 updateCompBorrowIndex(address(cToken), borrowIndex);
-                for (uint j = 0; j < holders.length; j++) {
+                for (uint j = 0; j < holders.length; j++) {  // @audit-gas improved for loops
                     distributeBorrowerComp(address(cToken), holders[j], borrowIndex);
                 }
             }
             if (suppliers == true) {
                 updateCompSupplyIndex(address(cToken));
-                for (uint j = 0; j < holders.length; j++) {
+                for (uint j = 0; j < holders.length; j++) {  // @audit-gas improved for loops
                     distributeSupplierComp(address(cToken), holders[j]);
                 }
             }
         }
-        for (uint j = 0; j < holders.length; j++) {
+        for (uint j = 0; j < holders.length; j++) {  // @audit-gas improved for loops
             compAccrued[holders[j]] = grantCompInternal(holders[j], compAccrued[holders[j]]);
         }
     }
@@ -1409,13 +1409,13 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
      * @param supplySpeeds New supply-side COMP speed for the corresponding market.
      * @param borrowSpeeds New borrow-side COMP speed for the corresponding market.
      */
-    function _setCompSpeeds(CToken[] memory cTokens, uint[] memory supplySpeeds, uint[] memory borrowSpeeds) public {
+    function _setCompSpeeds(CToken[] memory cTokens, uint[] memory supplySpeeds, uint[] memory borrowSpeeds) public {  // @audit-gas memory to calldata
         require(adminOrInitializing(), "only admin can set comp speed");
 
-        uint numTokens = cTokens.length;
-        require(numTokens == supplySpeeds.length && numTokens == borrowSpeeds.length, "Comptroller::_setCompSpeeds invalid input");
+        uint numTokens = cTokens.length; // @audit-gas it's cheaper to use 2 requires
+        require(numTokens == supplySpeeds.length && numTokens == borrowSpeeds.length, "Comptroller::_setCompSpeeds invalid input"); // @audit-gas > 32 bytes
 
-        for (uint i = 0; i < numTokens; ++i) {
+        for (uint i = 0; i < numTokens; ++i) {  // @audit-gas improved for loops
             setCompSpeedInternal(cTokens[i], supplySpeeds[i], borrowSpeeds[i]);
         }
     }
@@ -1477,7 +1477,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function setWETHAddress(address wethAddr) virtual public {
-        require(msg.sender == admin, "Only admin may initialize Weth Address");
+        require(msg.sender == admin, "Only admin may initialize Weth Address"); // @audit-gas > 32 bytes
         WethAddr = wethAddr;
     }
 }

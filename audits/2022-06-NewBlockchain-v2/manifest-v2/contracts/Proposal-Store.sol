@@ -6,7 +6,7 @@ pragma solidity ^0.8.0;
 // This is an evil token. Whenever an A -> B transfer is called, half of the amount goes to B
 // and half to a predefined C
 contract ProposalStore {
-        // @notice Ballot receipt record for a voter
+        // @notice Ballot receipt record for a voter // @audit-non remove extra tabulation
     // Proposal[] private proposals;
     struct Proposal {
         // @notice Unique id for looking up a proposal
@@ -40,13 +40,13 @@ contract ProposalStore {
     }
     
     function AddProposal(uint propId, string memory title, string memory desc, address[] memory targets, 
-                        uint[] memory values, string[] memory signatures, bytes[] memory calldatas) public {
+                        uint[] memory values, string[] memory signatures, bytes[] memory calldatas) public { // @audit-gas change memory to calldata
         require(msg.sender == UniGovModAcct);
         Proposal memory newProp = Proposal(propId, title, desc, targets, values, signatures, calldatas);
         proposals[propId] = newProp;
     }
 
-    function QueryProp(uint propId) public view returns(Proposal memory){
+    function QueryProp(uint propId) public view returns(Proposal memory){ // @audit-gas change memory to calldata
         if (proposals[propId].id == propId) {
             return proposals[propId];
         }

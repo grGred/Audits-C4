@@ -2,7 +2,7 @@
 pragma solidity ^0.8.10;
 
 import "./CToken.sol";
-import "hardhat/console.sol";
+import "hardhat/console.sol"; // @audit-non remove hardhat/console.sol from imports
 
 interface CompLike {
     function delegate(address delegatee) external;
@@ -126,8 +126,8 @@ contract CErc20 is CToken, CErc20Interface {
      * @param token The address of the ERC-20 token to sweep
      */
     function sweepToken(EIP20NonStandardInterface token) override external {
-        require(msg.sender == admin, "CErc20::sweepToken: only admin can sweep tokens");
-        require(address(token) != underlying, "CErc20::sweepToken: can not sweep underlying token");
+        require(msg.sender == admin, "CErc20::sweepToken: only admin can sweep tokens"); // @audit-gas > 32 bytes
+        require(address(token) != underlying, "CErc20::sweepToken: can not sweep underlying token"); // @audit-gas > 32 bytes
         uint256 balance = token.balanceOf(address(this));
         token.transfer(admin, balance);
     }

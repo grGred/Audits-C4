@@ -84,7 +84,7 @@ contract BaseV1Router01 is PriceOracle {
     bytes32 immutable pairCodeHash;
 
     modifier ensure(uint deadline) {
-        //require(deadline >= block.timestamp, "BaseV1Router: EXPIRED");
+        //require(deadline >= block.timestamp, "BaseV1Router: EXPIRED"); @audit-gas This modifier is useless since the require is commented
         _;
     }
 
@@ -101,7 +101,7 @@ contract BaseV1Router01 is PriceOracle {
     }
 
     function sortTokens(address tokenA, address tokenB) public pure returns (address token0, address token1) {
-        require(tokenA != tokenB, "BaseV1Router: IDENTICAL_ADDRESSES");
+        require(tokenA != tokenB, "BaseV1Router: IDENTICAL_ADDRESSES"); // @audit-gas > 32 bytes
         (token0, token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
         require(token0 != address(0), "BaseV1Router: ZERO_ADDRESS");
     }
@@ -119,8 +119,8 @@ contract BaseV1Router01 is PriceOracle {
 
     // given some amount of an asset and pair reserves, returns an equivalent amount of the other asset
     function quoteLiquidity(uint amountA, uint reserveA, uint reserveB) internal pure returns (uint amountB) {
-        require(amountA > 0, "BaseV1Router: INSUFFICIENT_AMOUNT");
-        require(reserveA > 0 && reserveB > 0, "BaseV1Router: INSUFFICIENT_LIQUIDITY");
+        require(amountA > 0, "BaseV1Router: INSUFFICIENT_AMOUNT");  // @audit-gas > 32 bytes
+        require(reserveA > 0 && reserveB > 0, "BaseV1Router: INSUFFICIENT_LIQUIDITY");  // @audit-gas > 32 bytes // @audit-gas 2 requires are cheaper
         amountB = amountA * reserveB / reserveA;
     }
 
@@ -147,11 +147,11 @@ contract BaseV1Router01 is PriceOracle {
     }
 
     // performs chained getAmountOut calculations on any number of pairs
-    function getAmountsOut(uint amountIn, route[] memory routes) public view returns (uint[] memory amounts) {
+    function getAmountsOut(uint amountIn, route[] memory routes) public view returns (uint[] memory amounts) { // @audit-gas memory to calldata
         require(routes.length >= 1, "BaseV1Router: INVALID_PATH");
         amounts = new uint[](routes.length+1);
         amounts[0] = amountIn;
-        for (uint i = 0; i < routes.length; i++) {
+        for (uint i = 0; i < routes.length; i++) { // @audit-gas improve for loop
             address pair = pairFor(routes[i].from, routes[i].to, routes[i].stable);
             if (IBaseV1Factory(factory).isPair(pair)) {
                 amounts[i+1] = IBaseV1Pair(pair).getAmountOut(amounts[i], routes[i].from);
@@ -173,7 +173,7 @@ contract BaseV1Router01 is PriceOracle {
         // create the pair if it doesn"t exist yet
         address _pair = IBaseV1Factory(factory).getPair(tokenA, tokenB, stable);
         (uint reserveA, uint reserveB) = (0,0);
-        uint _totalSupply = 0;
+        uint _totalSupply = 0; // @audit-gas no need to initalize
         if (_pair != address(0)) {
             _totalSupply = erc20(_pair).totalSupply();
             (reserveA, reserveB) = getReserves(tokenA, tokenB, stable);
@@ -238,12 +238,12 @@ contract BaseV1Router01 is PriceOracle {
         } else {
             uint amountBOptimal = quoteLiquidity(amountADesired, reserveA, reserveB);
             if (amountBOptimal <= amountBDesired) {
-                require(amountBOptimal >= amountBMin, "BaseV1Router: INSUFFICIENT_B_AMOUNT");
+                require(amountBOptimal >= amountBMin, "BaseV1Router: INSUFFICIENT_B_AMOUNT"); // @audit-gas > 32 bytes
                 (amountA, amountB) = (amountADesired, amountBOptimal);
             } else {
                 uint amountAOptimal = quoteLiquidity(amountBDesired, reserveB, reserveA);
                 assert(amountAOptimal <= amountADesired);
-                require(amountAOptimal >= amountAMin, "BaseV1Router: INSUFFICIENT_A_AMOUNT");
+                require(amountAOptimal >= amountAMin, "BaseV1Router: INSUFFICIENT_A_AMOUNT"); // @audit-gas > 32 bytes
                 (amountA, amountB) = (amountAOptimal, amountBDesired);
             }
         }
@@ -258,7 +258,7 @@ contract BaseV1Router01 is PriceOracle {
         uint amountAMin,
         uint amountBMin,
         address to,
-        uint deadline
+        uint deadline // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     ) external ensure(deadline) returns (uint amountA, uint amountB, uint liquidity) {
         (amountA, amountB) = _addLiquidity(tokenA, tokenB, stable, amountADesired, amountBDesired, amountAMin, amountBMin);
         address pair = pairFor(tokenA, tokenB, stable);
@@ -274,7 +274,7 @@ contract BaseV1Router01 is PriceOracle {
         uint amountTokenMin,
         uint amountCANTOMin,
         address to,
-        uint deadline
+        uint deadline // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     ) external payable ensure(deadline) returns (uint amountToken, uint amountCANTO, uint liquidity) {
         (amountToken, amountCANTO) = _addLiquidity(
             token,
@@ -303,7 +303,7 @@ contract BaseV1Router01 is PriceOracle {
         uint amountAMin,
         uint amountBMin,
         address to,
-        uint deadline
+        uint deadline // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     ) public ensure(deadline) returns (uint amountA, uint amountB) {
         address pair = pairFor(tokenA, tokenB, stable);
         require(IBaseV1Pair(pair).transferFrom(msg.sender, pair, liquidity)); // send liquidity to pair
@@ -321,7 +321,7 @@ contract BaseV1Router01 is PriceOracle {
         uint amountTokenMin,
         uint amountCANTOMin,
         address to,
-        uint deadline
+        uint deadline// @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     ) public ensure(deadline) returns (uint amountToken, uint amountCANTO) {
         (amountToken, amountCANTO) = removeLiquidity(
             token,
@@ -346,7 +346,7 @@ contract BaseV1Router01 is PriceOracle {
         uint amountAMin,
         uint amountBMin,
         address to,
-        uint deadline,
+        uint deadline, // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
         bool approveMax, uint8 v, bytes32 r, bytes32 s
     ) external returns (uint amountA, uint amountB) {
         address pair = pairFor(tokenA, tokenB, stable);
@@ -365,7 +365,7 @@ contract BaseV1Router01 is PriceOracle {
         uint amountTokenMin,
         uint amountCANTOMin,
         address to,
-        uint deadline,
+        uint deadline, // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
         bool approveMax, uint8 v, bytes32 r, bytes32 s
     ) external returns (uint amountToken, uint amountCANTO) {
         address pair = pairFor(token, address(wcanto), stable);
@@ -376,12 +376,12 @@ contract BaseV1Router01 is PriceOracle {
 
     // **** SWAP ****
     // requires the initial amount to have already been sent to the first pair
-    function _swap(uint[] memory amounts, route[] memory routes, address _to) internal virtual {
-        for (uint i = 0; i < routes.length; i++) {
+    function _swap(uint[] memory amounts, route[] memory routes, address _to) internal virtual { // @audit-gas change memory to calldata
+        for (uint i = 0; i < routes.length; i++) { // @audit-gas improve for loops
             (address token0,) = sortTokens(routes[i].from, routes[i].to);
             uint amountOut = amounts[i + 1];
             (uint amount0Out, uint amount1Out) = routes[i].from == token0 ? (uint(0), amountOut) : (amountOut, uint(0));
-            address to = i < routes.length - 1 ? pairFor(routes[i+1].from, routes[i+1].to, routes[i+1].stable) : _to;
+            address to = i < routes.length - 1 ? pairFor(routes[i+1].from, routes[i+1].to, routes[i+1].stable) : _to; // @audit-gas test this is there i needs to be cached
             IBaseV1Pair(pairFor(routes[i].from, routes[i].to, routes[i].stable)).swap(
                 amount0Out, amount1Out, to, new bytes(0)
             );
@@ -395,14 +395,14 @@ contract BaseV1Router01 is PriceOracle {
         address tokenTo,
         bool stable,
         address to,
-        uint deadline
+        uint deadline // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     ) external ensure(deadline) returns (uint[] memory amounts) {
         route[] memory routes = new route[](1);
         routes[0].from = tokenFrom;
         routes[0].to = tokenTo;
         routes[0].stable = stable;
         amounts = getAmountsOut(amountIn, routes);
-        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT"); // @audit-gas > 32
         _safeTransferFrom(
             routes[0].from, msg.sender, pairFor(routes[0].from, routes[0].to, routes[0].stable), amounts[0]
         );
@@ -414,17 +414,17 @@ contract BaseV1Router01 is PriceOracle {
         uint amountOutMin,
         route[] calldata routes,
         address to,
-        uint deadline
+        uint deadline // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     ) external ensure(deadline) returns (uint[] memory amounts) {
         amounts = getAmountsOut(amountIn, routes);
-        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT"); // @audit-gas > 32
         _safeTransferFrom(
             routes[0].from, msg.sender, pairFor(routes[0].from, routes[0].to, routes[0].stable), amounts[0]
         );
         _swap(amounts, routes, to);
     }
 
-    function swapExactCANTOForTokens(uint amountOutMin, route[] calldata routes, address to, uint deadline)
+    function swapExactCANTOForTokens(uint amountOutMin, route[] calldata routes, address to, uint deadline) // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     external
     payable
     ensure(deadline)
@@ -432,20 +432,20 @@ contract BaseV1Router01 is PriceOracle {
     {
         require(routes[0].from == address(wcanto), "BaseV1Router: INVALID_PATH");
         amounts = getAmountsOut(msg.value, routes);
-        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT"); // @audit-gas > 32
         wcanto.deposit{value: amounts[0]}();
         assert(wcanto.transfer(pairFor(routes[0].from, routes[0].to, routes[0].stable), amounts[0]));
         _swap(amounts, routes, to);
     }
 
-    function swapExactTokensForCANTO(uint amountIn, uint amountOutMin, route[] calldata routes, address to, uint deadline)
+    function swapExactTokensForCANTO(uint amountIn, uint amountOutMin, route[] calldata routes, address to, uint deadline) // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     external
     ensure(deadline)
     returns (uint[] memory amounts)
     {
         require(routes[routes.length - 1].to == address(wcanto), "BaseV1Router: INVALID_PATH");
         amounts = getAmountsOut(amountIn, routes);
-        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(amounts[amounts.length - 1] >= amountOutMin, "BaseV1Router: INSUFFICIENT_OUTPUT_AMOUNT"); // @audit-gas > 32
         _safeTransferFrom(
             routes[0].from, msg.sender, pairFor(routes[0].from, routes[0].to, routes[0].stable), amounts[0]
         );
@@ -455,10 +455,10 @@ contract BaseV1Router01 is PriceOracle {
     }
 
     function UNSAFE_swapExactTokensForTokens(
-        uint[] memory amounts,
+        uint[] memory amounts, // @audit-gas change to calldata
         route[] calldata routes,
         address to,
-        uint deadline
+        uint deadline // @audit-gas since the ensure modifier doesn't work you can remove deadline input param
     ) external ensure(deadline) returns (uint[] memory) {
         _safeTransferFrom(routes[0].from, msg.sender, pairFor(routes[0].from, routes[0].to, routes[0].stable), amounts[0]);
         _swap(amounts, routes, to);
@@ -466,15 +466,15 @@ contract BaseV1Router01 is PriceOracle {
     }
 
     function _safeTransferCANTO(address to, uint value) internal {
-        (bool success,) = to.call{value:value}(new bytes(0));
-        require(success, "TransferHelper: ETH_TRANSFER_FAILED");
+        (bool success,) = to.call{value:value}(new bytes(0)); // @audit-gas or non critical. bytes(0)?
+        require(success, "TransferHelper: ETH_TRANSFER_FAILED"); // @audit-gas 35 bytes, use errors
     }
 
     function _safeTransfer(address token, address to, uint256 value) internal {
         require(token.code.length > 0);
         (bool success, bytes memory data) =
         token.call(abi.encodeWithSelector(erc20.transfer.selector, to, value));
-        require(success && (data.length == 0 || abi.decode(data, (bool))));
+        require(success && (data.length == 0 || abi.decode(data, (bool)))); // @audit-gas double require is cheaper
     }
 
     function _safeTransferFrom(address token, address from, address to, uint256 value) internal {
@@ -510,7 +510,7 @@ contract BaseV1Router01 is PriceOracle {
             IBaseV1Pair pair1;
             IBaseV1Pair pair2;
             //instantiate pair and check whether or not it is stable
-            pair  = IBaseV1Pair(underlying);
+            pair  = IBaseV1Pair(underlying); // @audit-non extra space
             stablePair = pair.stable();
 
             //instantiate the addresses of the tokens
@@ -535,7 +535,7 @@ contract BaseV1Router01 is PriceOracle {
     }
 
 
-    function compareStrings(string memory str1, string memory str2) internal pure returns(bool) {
+    function compareStrings(string memory str1, string memory str2) internal pure returns(bool) { // @audit-gas use calldata
         return (keccak256(abi.encodePacked(str1)) == keccak256(abi.encodePacked(str2)));
     }
 

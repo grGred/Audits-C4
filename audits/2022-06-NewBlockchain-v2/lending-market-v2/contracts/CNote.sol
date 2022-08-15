@@ -14,7 +14,7 @@ contract CNote is CErc20Delegate {
     AccountantInterface public _accountant; // accountant private _accountant = Accountant(address(0));
     
     function setAccountantContract(address accountant_) public {
-        require(msg.sender == admin, "CNote::_setAccountantContract:Only admin may call this function");
+        require(msg.sender == admin, "CNote::_setAccountantContract:Only admin may call this function"); // @audit-gas > 32 bytes error message
         
         emit AccountantSet(accountant_, address(_accountant));
 	    _accountant = AccountantInterface(accountant_);
@@ -54,7 +54,7 @@ contract CNote is CErc20Delegate {
              * Otherwise:
              *  exchangeRate = (totalCash + totalBorrows - totalReserves) / totalSupply
              */
-            uint cashPlusBorrowsMinusReserves = totalBorrows - totalReserves;// totalCash in cNote Lending Market is zero, thus it is not factored into the exchangeRate
+            uint cashPlusBorrowsMinusReserves = totalBorrows - totalReserves;// totalCash in cNote Lending Market is zero, thus it is not factored into the exchangeRate // @audit-non add space to improve code quality
             uint exchangeRate = cashPlusBorrowsMinusReserves * expScale / _totalSupply;
 
             return exchangeRate;
@@ -96,13 +96,13 @@ contract CNote is CErc20Delegate {
         uint balanceAfter = token.balanceOf(address(this)); // Calculate the amount that was *actually* transferred
 
         if (from != address(_accountant)) {
-            uint err = _accountant.redeemMarket(balanceAfter); //Whatever is transferred into cNote is then redeemed by the accountant
-            if (err !=0) {
+            uint err = _accountant.redeemMarket(balanceAfter); //Whatever is transferred into cNote is then redeemed by the accountant  // @audit-non add extra space
+            if (err !=0) { // @audit-non add extra space
                 revert AccountantSupplyError(balanceAfter);
             }
             uint balanceCur = token.balanceOf(address(this));
 
-            require(balanceCur == 0, "Accountant has not been correctly supplied");
+            require(balanceCur == 0, "Accountant has not been correctly supplied"); // @audit-gas > 32 bytes error message
         }
         
         return balanceAfter;   // underflow already checked above, just subtract
@@ -118,11 +118,11 @@ contract CNote is CErc20Delegate {
      *            See here: https://medium.com/coinmonks/missing-return-value-bug-at-least-130-tokens-affected-d67bf08521ca
      */
     function doTransferOut(address payable to, uint amount) virtual override internal {
-        require(address(_accountant) != address(0)); //check that the accountant has been set
+        require(address(_accountant) != address(0)); //check that the accountant has been set  // @audit-non add extra space
         EIP20Interface token = EIP20Interface(underlying);
 
         if (to != address(_accountant)) {
-            uint err = _accountant.supplyMarket(amount); //Accountant redeems requisite cNote to supply this market
+            uint err = _accountant.supplyMarket(amount); //Accountant redeems requisite cNote to supply this market  // @audit-non add extra space
             if (err != 0) {
                 revert AccountantRedeemError(amount);
             }

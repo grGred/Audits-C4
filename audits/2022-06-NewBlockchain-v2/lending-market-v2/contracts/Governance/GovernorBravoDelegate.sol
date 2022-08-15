@@ -12,19 +12,19 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
     uint public constant proposalMaxOperations = 10; // 10 actions
 
     /// @notice The EIP-712 typehash for the contract's domain
-    bytes32 public constant DOMAIN_TYPEHASH = keccak256("EIP712Domain(string name,uint256 chainId,address verifyingContract)");
+    bytes32 public constant DOMAIN_TYPEHASH = keccak256("EIP712Domain(string name,uint256 chainId,address verifyingContract)");  // @audit-gas change to immutable
 
     /// @notice The EIP-712 typehash for the ballot struct used by the contract
-    bytes32 public constant BALLOT_TYPEHASH = keccak256("Ballot(uint256 proposalId,uint8 support)");
+    bytes32 public constant BALLOT_TYPEHASH = keccak256("Ballot(uint256 proposalId,uint8 support)"); // @audit-gas change to immutable
 
     /**
       * @notice Used to initialize the contract during delegator constructor
       * @param timelock_ The address of the Timelock
       */
     function initialize(address timelock_) virtual public {
-        require(address(timelock) == address(0), "GovernorBravo::initialize: can only initialize once");
-        require(msg.sender == admin, "GovernorBravo::initialize: admin only");
-        require(timelock_ != address(0), "GovernorBravo::initialize: invalid timelock address");
+        require(address(timelock) == address(0), "GovernorBravo::initialize: can only initialize once"); // @audit-gas >32 bytes
+        require(msg.sender == admin, "GovernorBravo::initialize: admin only"); // @audit-gas >32 bytes
+        require(timelock_ != address(0), "GovernorBravo::initialize: invalid timelock address"); // @audit-gas >32 bytes
         unigov = IProposal(0x30E20d0A642ADB85Cb6E9da8fB9e3aadB0F593C0);
 
         timelock = TimelockInterface(timelock_);
@@ -39,12 +39,12 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
         IProposal.Proposal memory unigovProposal = unigov.QueryProp(proposalId);
 
         // Allow addresses above proposal threshold and whitelisted addresses to propose
-        require(unigovProposal.targets.length == unigovProposal.values.length && 
+        require(unigovProposal.targets.length == unigovProposal.values.length && // @audit-gas 3 require cheaper than &&
                 unigovProposal.targets.length == unigovProposal.signatures.length && 
                 unigovProposal.targets.length == unigovProposal.calldatas.length, 
-                "GovernorBravo::propose: proposal function information arity mismatch");
-        require(unigovProposal.targets.length != 0, "GovernorBravo::propose: must provide actions");
-        require(unigovProposal.targets.length <= proposalMaxOperations, "GovernorBravo::propose: too many actions");
+                "GovernorBravo::propose: proposal function information arity mismatch"); // @audit-gas >32 bytes
+        require(unigovProposal.targets.length != 0, "GovernorBravo::propose: must provide actions"); // @audit-gas >32 bytes
+        require(unigovProposal.targets.length <= proposalMaxOperations, "GovernorBravo::propose: too many actions"); // @audit-gas >32 bytes
 
         // Add proposal to proposals storage
         Proposal storage newProposal = proposals[unigovProposal.id];
@@ -63,7 +63,7 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
         uint eta = add256(block.timestamp, timelock.delay());
         
 
-        for (uint i = 0; i < newProposal.targets.length; i++) {
+        for (uint i = 0; i < newProposal.targets.length; i++) { // @audit-gas improve for loops
             queueOrRevertInternal(newProposal.targets[i], newProposal.values[i], newProposal.signatures[i], newProposal.calldatas[i], eta);
         }
 
@@ -73,7 +73,7 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
     }
 
     function queueOrRevertInternal(address target, uint value, string memory signature, bytes memory data, uint eta) internal {
-        require(!timelock.queuedTransactions(keccak256(abi.encode(target, value, signature, data, eta))), "GovernorBravo::queueOrRevertInternal: identical proposal action already queued at eta");
+        require(!timelock.queuedTransactions(keccak256(abi.encode(target, value, signature, data, eta))), "GovernorBravo::queueOrRevertInternal: identical proposal action already queued at eta");  // @audit-gas >32 bytes
         timelock.queueTransaction(target, value, signature, data, eta);
     }
 
@@ -82,10 +82,10 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
       * @param proposalId The id of the proposal to execute
       */
     function execute(uint proposalId) external payable {
-        require(state(proposalId) == ProposalState.Queued, "GovernorBravo::execute: proposal can only be executed if it is queued");
+        require(state(proposalId) == ProposalState.Queued, "GovernorBravo::execute: proposal can only be executed if it is queued");  // @audit-gas >32 bytes
         Proposal storage proposal = proposals[proposalId];
         proposal.executed = true;
-        for (uint i = 0; i < proposal.targets.length; i++) {
+        for (uint i = 0; i < proposal.targets.length; i++) {  // @audit-gas improve for loops
             timelock.executeTransaction{value: proposal.values[i]}(proposal.targets[i], proposal.values[i], proposal.signatures[i], proposal.calldatas[i], proposal.eta);
         }
         emit ProposalExecuted(proposalId);
@@ -99,7 +99,7 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
       * @return signatures of the proposal actions
       * @return calldatas of the proposal actions
       */
-    function getActions(uint proposalId) external view returns (address[] memory targets, uint[] memory values, string[] memory signatures, bytes[] memory calldatas) {
+    function getActions(uint proposalId) external view returns (address[] memory targets, uint[] memory values, string[] memory signatures, bytes[] memory calldatas) { // @audit-gas calldata is cheaper than memory
         Proposal storage p = proposals[proposalId];
         return (p.targets, p.values, p.signatures, p.calldatas);
     }
@@ -125,8 +125,8 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
       * @dev Admin only. Sets initial proposal id which initiates the contract, ensuring a continuous proposal id count
       */
     function _initiate() external {
-        require(msg.sender == admin, "GovernorBravo::_initiate: admin only");
-        require(initialProposalId == 0, "GovernorBravo::_initiate: can only initiate once");
+        require(msg.sender == admin, "GovernorBravo::_initiate: admin only"); // @audit-gas >32 bytes
+        require(initialProposalId == 0, "GovernorBravo::_initiate: can only initiate once"); // @audit-gas >32 bytes
         timelock.acceptAdmin();
     }
 
@@ -137,7 +137,7 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
       */
     function _setPendingAdmin(address newPendingAdmin) external {
         // Check caller = admin
-        require(msg.sender == admin, "GovernorBravo:_setPendingAdmin: admin only");
+        require(msg.sender == admin, "GovernorBravo:_setPendingAdmin: admin only"); // @audit-gas >32 bytes
 
         // Save current value, if any, for inclusion in log
         address oldPendingAdmin = pendingAdmin;
@@ -155,7 +155,7 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV2, GovernorBravoE
       */
     function _acceptAdmin() external {
         // Check caller is pendingAdmin and pendingAdmin ≠ address(0), msg.sender cannot == address(0)
-        require(msg.sender == pendingAdmin, "GovernorBravo:_acceptAdmin: pending admin only");
+        require(msg.sender == pendingAdmin, "GovernorBravo:_acceptAdmin: pending admin only"); // @audit-gas >32 bytes
 
         // Save current values for inclusion in log
         address oldAdmin = admin;

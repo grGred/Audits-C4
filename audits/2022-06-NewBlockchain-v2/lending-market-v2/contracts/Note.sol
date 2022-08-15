@@ -20,7 +20,7 @@ contract Note is ERC20 {
     
     function _setAccountantAddress(address accountant_) external {
         require(msg.sender == admin);
-        require(address(accountant) == address(0));
+        require(address(accountant) == address(0)); // @audit-gas no need to do type conversion since an accountant is already an address
         accountant = accountant_;
         if (balanceOf(accountant) != type(uint).max) {
             _mint_to_Accountant(accountant);

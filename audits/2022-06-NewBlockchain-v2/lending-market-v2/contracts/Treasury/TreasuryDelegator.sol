@@ -9,7 +9,7 @@ contract TreasuryDelegator is TreasuryDelegatorInterface, TreasuryInterface{
     *@param implementation_, address of current implementation to delegate calls to
     *@param admin_, administrator of contract, generally speaking, will be Timelock
     */	
-    constructor( address note_, address implementation_, address admin_) {
+    constructor( address note_, address implementation_, address admin_) { // @audit-non remove extra space
         require(admin_ != address(0));
         // Admin set to msg.sender for initialization
         admin = msg.sender;
@@ -28,8 +28,8 @@ contract TreasuryDelegator is TreasuryDelegatorInterface, TreasuryInterface{
      */
     function setImplementation(address implementation_) override public {
 
-        require(msg.sender == admin, "GovernorBravoDelegator::setImplementation: admin only");
-        require(implementation_ != address(0), "GovernorBravoDelegator::setImplementation: invalid implementation address");
+        require(msg.sender == admin, "GovernorBravoDelegator::setImplementation: admin only"); // @audit-gas > 32 bytes
+        require(implementation_ != address(0), "GovernorBravoDelegator::setImplementation: invalid implementation address"); // @audit-gas > 32 bytes
 
         address oldImplementation = implementation;
         implementation = implementation_;
@@ -74,7 +74,7 @@ contract TreasuryDelegator is TreasuryDelegatorInterface, TreasuryInterface{
      * @param data The raw data to delegatecall
      * @return bytes returned bytes from the delegater 
      */
-    function delegateToImplementation(bytes memory data) public returns (bytes memory) {
+    function delegateToImplementation(bytes memory data) public returns (bytes memory) { // @audit-gas memory to calldata
         return delegateTo(implementation, data);
     }
 
@@ -85,7 +85,7 @@ contract TreasuryDelegator is TreasuryDelegatorInterface, TreasuryInterface{
      * @param data The raw data to delegatecall
      * @return bytes returned bytes from the delegatecall
      */
-    function delegateToViewImplementation(bytes memory data) public view returns (bytes memory) {
+    function delegateToViewImplementation(bytes memory data) public view returns (bytes memory) { // @audit-gas memory to calldata
         (bool success, bytes memory returnData) = address(this).staticcall(abi.encodeWithSignature("delegateToImplementation(bytes)", data));
         assembly {
             if eq(success, 0) {
@@ -102,7 +102,7 @@ contract TreasuryDelegator is TreasuryDelegatorInterface, TreasuryInterface{
      * @param callee The contract to delegatecall
      * @param data The raw data to delegatecall
      */
-    function delegateTo(address callee, bytes memory data) internal returns(bytes memory) {
+    function delegateTo(address callee, bytes memory data) internal returns(bytes memory) { // @audit-gas memory to calldata
         (bool success, bytes memory returnData) = callee.delegatecall(data);
         assembly {
             if eq(success, 0) {
@@ -112,13 +112,13 @@ contract TreasuryDelegator is TreasuryDelegatorInterface, TreasuryInterface{
         return returnData;
     }
 
-	/**
+	/** // @audit-non remove extra tablultation
      * @dev Delegates execution to an implementation contract.
      * It returns to the external caller whatever the implementation returns
      * or forwards reverts.
      */
     fallback() external payable override {
-        require(msg.value == 0, "TreasuryDelegator::fallback:cannot send value to fallback");
+        require(msg.value == 0, "TreasuryDelegator::fallback:cannot send value to fallback"); // @audit-gas > 32 bytes
         // delegate all other functions to current implementation
         (bool success, ) = implementation.delegatecall(msg.data);
 

@@ -39,8 +39,8 @@ contract AccountantDelegator is AccountantInterface, AccountantDelegatorInterfac
      * @param implementation_ The address of the new implementation for delegation
      */
     function setImplementation(address implementation_) public override {
-        require(msg.sender == admin, "AccountantDelegator::_setImplementation: admin only");
-        require(implementation_ != address(0), "AccountantDelegator::_setImplementation: invalid implementation address");
+        require(msg.sender == admin, "AccountantDelegator::_setImplementation: admin only"); // @audit-gas > 32 bytes
+        require(implementation_ != address(0), "AccountantDelegator::_setImplementation: invalid implementation address"); // @audit-gas > 32 bytes
         emit NewImplementation(implementation, implementation_);
        
         implementation = implementation_;
@@ -50,7 +50,7 @@ contract AccountantDelegator is AccountantInterface, AccountantDelegatorInterfac
      * @notice A public function to sweep accidental ERC-20 transfers to this contract. Tokens are sent to admin (timelock)
      * @param amount amount of Note Accountant is supplying to market
      */
-    function supplyMarket(uint amount ) external override returns(uint) {
+    function supplyMarket(uint amount ) external override returns(uint) { // @audit-non remove extra space
         bytes memory data = delegateToImplementation(abi.encodeWithSignature("supplyMarket(uint256)", amount));
         return abi.decode(data, (uint));
     }
@@ -77,7 +77,7 @@ contract AccountantDelegator is AccountantInterface, AccountantDelegatorInterfac
      * @param callee The contract to delegatecall
      * @param data The raw data to delegatecall
      */
-    function delegateTo(address callee, bytes memory data) internal returns(bytes memory) {
+    function delegateTo(address callee, bytes memory data) internal returns(bytes memory) { // @audit-gas change memory to calldata
         (bool success, bytes memory returnData) = callee.delegatecall(data);
         assembly {
             if eq(success, 0) {
@@ -93,7 +93,7 @@ contract AccountantDelegator is AccountantInterface, AccountantDelegatorInterfac
      * @param data The raw data to delegatecall
      * @return The returned bytes from the delegatecall
      */
-    function delegateToImplementation(bytes memory data) public returns (bytes memory) {
+    function delegateToImplementation(bytes memory data) public returns (bytes memory) { // @audit-gas change memory to calldata
         return delegateTo(implementation, data);
     }
 
@@ -104,7 +104,7 @@ contract AccountantDelegator is AccountantInterface, AccountantDelegatorInterfac
      * @param data The raw data to delegatecall
      * @return The returned bytes from the delegatecall
      */
-    function delegateToViewImplementation(bytes memory data) public view returns (bytes memory) {
+    function delegateToViewImplementation(bytes memory data) public view returns (bytes memory) {  // @audit-gas change memory to calldata
         (bool success, bytes memory returnData) = address(this).staticcall(abi.encodeWithSignature("delegateToImplementation(bytes)", data));
         assembly {
             if eq(success, 0) {
@@ -120,7 +120,7 @@ contract AccountantDelegator is AccountantInterface, AccountantDelegatorInterfac
      * @dev It returns to the external caller whatever the implementation returns or forwards reverts
      */
     fallback () external payable {
-        require(msg.value == 0,"AccountantDelegator:fallback: cannot send value to fallback");
+        require(msg.value == 0,"AccountantDelegator:fallback: cannot send value to fallback"); // @audit-gas > 32 bytes
 
         (bool success, ) = implementation.delegatecall(msg.data); // delegate all other functions to current implementation
 

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-import "hardhat/console.sol";
+import "hardhat/console.sol"; // @audit-non remove hardhat/console.sol from imports
 
 interface erc20 {
     function totalSupply() external view returns (uint256);
@@ -45,7 +45,7 @@ contract BaseV1Pair {
     // Used to denote stable or volatile pair, not immutable since construction happens in the initialize method for CREATE2 deterministic addresses
     bool public immutable stable;
 
-    uint public totalSupply = 0;
+    uint public totalSupply = 0; // @audit-gas don't initialize param
 
     mapping(address => mapping (address => uint)) public allowance;
     mapping(address => uint) public balanceOf;
@@ -69,7 +69,7 @@ contract BaseV1Pair {
     }
 
     // Capture oracle reading every 30 minutes
-    uint constant periodSize = 0;
+    uint constant periodSize = 0; // @audit-gas don't initialize param
 
     Observation[] public observations;
 
@@ -163,7 +163,7 @@ contract BaseV1Pair {
 
         Observation memory _point = lastObservation();
         timeElapsed = blockTimestamp - _point.timestamp; // compare the last observation with current timestamp, if greater than 30 minutes, record a new event
-        if (timeElapsed > periodSize) {
+        if (timeElapsed > periodSize) { // @audit-gas >= is cheaper than >
             observations.push(Observation(blockTimestamp, reserve0CumulativeLast, reserve1CumulativeLast));
         }
         reserve0 = balance0;
@@ -204,10 +204,10 @@ contract BaseV1Pair {
 
     // as per `current`, however allows user configured granularity, up to the full window size
     function quote(address tokenIn, uint amountIn, uint granularity) external view returns (uint amountOut) {
-        console.log("tokenIn: ", tokenIn);
+        console.log("tokenIn: ", tokenIn); // @audit-gas remove console.log from contract while deploying it
         uint [] memory _prices = sample(tokenIn, amountIn, granularity, 1);
         uint priceAverageCumulative;
-        for (uint i = 0; i < _prices.length; i++) {
+        for (uint i = 0; i < _prices.length; i++) { // @audit-gas for loop can be improved
             priceAverageCumulative += _prices[i];
         }
         return priceAverageCumulative / granularity;
@@ -232,7 +232,7 @@ contract BaseV1Pair {
             uint _reserve0 = (observations[nextIndex].reserve0Cumulative - observations[i].reserve0Cumulative) / timeElapsed;
             uint _reserve1 = (observations[nextIndex].reserve1Cumulative - observations[i].reserve1Cumulative) / timeElapsed;
             _prices[index] = _getAmountOut(amountIn, tokenIn, _reserve0, _reserve1);
-            index = index + 1;
+            index = index + 1; // @audit-gas cheaper to increment
         }   
         return _prices;
     }
@@ -288,13 +288,13 @@ contract BaseV1Pair {
         require(!BaseV1Factory(factory).isPaused());
         require(amount0Out > 0 || amount1Out > 0, 'IOA'); // BaseV1: INSUFFICIENT_OUTPUT_AMOUNT
         (uint _reserve0, uint _reserve1) =  (reserve0, reserve1);
-        require(amount0Out < _reserve0 && amount1Out < _reserve1, 'IL'); // BaseV1: INSUFFICIENT_LIQUIDITY
+        require(amount0Out < _reserve0 && amount1Out < _reserve1, 'IL'); // BaseV1: INSUFFICIENT_LIQUIDITY // @audit-gas double require
 
         uint _balance0;
         uint _balance1;
         { // scope for _token{0,1}, avoids stack too deep errors
         (address _token0, address _token1) = (token0, token1);
-        require(to != _token0 && to != _token1, 'IT'); // BaseV1: INVALID_TO
+        require(to != _token0 && to != _token1, 'IT'); // BaseV1: INVALID_TO // @audit-gas double require
         if (amount0Out > 0) _safeTransfer(_token0, to, amount0Out); // optimistically transfer tokens
         if (amount1Out > 0) _safeTransfer(_token1, to, amount1Out); // optimistically transfer tokens
         if (data.length > 0) IBaseV1Callee(to).hook(msg.sender, amount0Out, amount1Out, data); // callback, used for flash loans
@@ -431,7 +431,7 @@ contract BaseV1Pair {
             )
         );
         address recoveredAddress = ecrecover(digest, v, r, s);
-        require(recoveredAddress != address(0) && recoveredAddress == owner, 'BaseV1: INVALID_SIGNATURE');
+        require(recoveredAddress != address(0) && recoveredAddress == owner, 'BaseV1: INVALID_SIGNATURE'); // @audit-gas double require
         allowance[owner][spender] = value;
 
         emit Approval(owner, spender, value);
@@ -446,7 +446,7 @@ contract BaseV1Pair {
         address spender = msg.sender;
         uint spenderAllowance = allowance[src][spender];
 
-        if (spender != src && spenderAllowance != type(uint).max) {
+        if (spender != src && spenderAllowance != type(uint).max) { // @audit-gas double require
             uint newAllowance = spenderAllowance - amount;
             allowance[src][spender] = newAllowance;
 

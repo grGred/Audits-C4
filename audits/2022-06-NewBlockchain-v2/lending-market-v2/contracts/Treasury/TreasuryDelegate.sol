@@ -9,8 +9,8 @@ import "../CTokenInterfaces.sol";
 
 contract TreasuryDelegate is TreasuryInterface {
 
-    bytes32 constant cantoDenom = keccak256(bytes("CANTO"));
-    bytes32 constant noteDenom = keccak256(bytes("NOTE")); //cache hashed values to reduce unnecessary gas costs
+    bytes32 constant cantoDenom = keccak256(bytes("CANTO")); // @audit-gas change constants to immutable for keccak
+    bytes32 constant noteDenom = keccak256(bytes("NOTE")); //cache hashed values to reduce unnecessary gas costs // @audit-gas change constants to immutable for keccak
 
     /**
      * @notice Initializes the note contract
@@ -50,7 +50,7 @@ contract TreasuryDelegate is TreasuryInterface {
             revert InvalidAddress();
         }
         CErc20Interface cnote = CErc20Interface(cNote); //initialize cNote
-        uint err = cnote.redeem(cTokens); //
+        uint err = cnote.redeem(cTokens); // // @audit-non missed comment
         if (err != 0) {
             revert SendFundError(cTokens);
         }

@@ -97,7 +97,7 @@ contract NoteRateModel is InterestRateModel {
     }
 
     function initialize(address cnoteAddr, address oracleAddress) external {
-        if (msg.sender != admin ) {
+        if (msg.sender != admin ) { // @audit-non remove extra space
             revert SenderNotAdmin(msg.sender);
         }   
         address oldPriceOracle = address(oracle);
@@ -141,8 +141,8 @@ contract NoteRateModel is InterestRateModel {
         if (deltaBlocks > updateFrequency) {
             // pass in a base rate per year
             //baseRatePerYear = newBaseRatePerYear;
-                    // Gets the Note/gUSDC TWAP in a given interval, as a mantissa (scaled by 1e18)
-            uint twapMantissa = oracle.getUnderlyingPrice(cNote); // returns price as mantissa
+                    // Gets the Note/gUSDC TWAP in a given interval, as a mantissa (scaled by 1e18) // @audit-non remove extra tabulation
+            uint twapMantissa = oracle.getUnderlyingPrice(cNote); // returns price as mantissa // @audit-gas no need to add a variable since its used only once
             //uint ir = (1 - twapMantissa).mul(adjusterCoefficient).add(baseRatePerYear);
             int diff = BASE - int(twapMantissa); //possible annoyance if 1e18 - twapMantissa > 2**255, differ
             int InterestAdjust = (diff * int(adjusterCoefficient))/BASE;
@@ -164,7 +164,7 @@ contract NoteRateModel is InterestRateModel {
       */
     function _setBaseRatePerYear(uint newBaseRateMantissa) external {
         // Check caller is admin
-        require(msg.sender == admin, "only the admin may set the base rate");
+        require(msg.sender == admin, "only the admin may set the base rate"); // @audit-gas > 32 bytes
         uint oldBaseRatePerYear = baseRatePerYear;
         baseRatePerYear = newBaseRateMantissa;
         emit NewBaseRate(oldBaseRatePerYear, baseRatePerYear);
@@ -177,7 +177,7 @@ contract NoteRateModel is InterestRateModel {
       */
     function _setAdjusterCoefficient(uint newAdjusterCoefficient) external {
         // Check caller is admin
-        require(msg.sender == admin, "only the admin may set the adjuster coefficient");
+        require(msg.sender == admin, "only the admin may set the adjuster coefficient"); // @audit-gas > 32 bytes
         uint oldAdjusterCoefficient = adjusterCoefficient;
         adjusterCoefficient = newAdjusterCoefficient;
         emit NewAdjusterCoefficient(oldAdjusterCoefficient, adjusterCoefficient);
@@ -190,7 +190,7 @@ contract NoteRateModel is InterestRateModel {
       */
     function _setUpdateFrequency(uint newUpdateFrequency) external {
         // Check caller is admin
-        require(msg.sender == admin, "only the admin may set the update frequency");
+        require(msg.sender == admin, "only the admin may set the update frequency");  // @audit-gas > 32 bytes
         uint oldUpdateFrequency = updateFrequency;
         updateFrequency = newUpdateFrequency;
         emit NewUpdateFrequency(oldUpdateFrequency, updateFrequency);
