@@ -1,0 +1,12 @@
+[profile.default]
+remappings = [
+    'solmate/=lib/solmate/src/',
+    'forge-std/=lib/forge-std/src/',
+
+    'interfaces/=src/interfaces',
+    'modules/=src/modules',
+    'policies/=src/policies',
+    'libraries/=src/libraries',
+    'test/=src/test/'
+]
+ffi = true
